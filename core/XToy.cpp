@@ -945,6 +945,7 @@ bool XToy::initialize_weights()
     if (OW.size() > 0)
     {
         M_DEBUG << "construct lbs_matrix" << endl;
+        // horizontally stacking the OW and EW matrices.
         MatrixXd OEW(OW.rows(), OW.cols() + EW.cols());
         if (EW.size() == 0)
         {
@@ -954,6 +955,9 @@ bool XToy::initialize_weights()
         {
             OEW << OW, EW;
         }
+        // computes the matrix M based on V and OEW.
+        // Once you have M, you can apply the transformations of the bones 
+        // to this matrix to get the deformed positions of the vertices.
         igl::lbs_matrix(V, OEW, M);
         M_DEBUG << " M=" << M.rows() << ", " << M.cols() << endl;
         // cout << M.block(0, 0, 10, M.cols()) << endl;
@@ -1362,7 +1366,8 @@ bool XToy::drag_bone(int sx, int sy,
 
             // 3D LBS
             if (auto_dof)
-            {
+            {   
+                // compute the transformation matrix
                 transformations();
             }
 
@@ -2160,6 +2165,8 @@ int XToy::GetPaintColorIdx(const ColorI &color)
     {
         ColorI colorTmp = m_vPaintColor[i];
 
+        cout << "?????????? " << colorTmp.r << " " << colorTmp.g << " " << colorTmp.b << endl;
+
         if (r == colorTmp.r && g == colorTmp.g && b == colorTmp.b)
         {
             colorIdx = i;
@@ -2208,6 +2215,7 @@ void XToy::InitTexturePaint(const ColorI &color)
         cout << __FILE__ << " " << __LINE__ << " InitTexturePaint" << endl;
     }
     int colorIdx = GetPaintColorIdx(color);
+    cout << "!!!!!!!!!!!!!!!! " << color.r << " " << color.g << " " << color.b << endl;
     XSubToy *subToy = m_subToys[m_curSubToyIdx];
     TMesh &mesh = subToy->m_curMesh3D;
     mesh.InitTMeshTexPaint(m_texWidth, m_blockWidth, colorIdx);
@@ -2218,6 +2226,7 @@ void XToy::InitTexturePaint(const ColorI &color)
 
 void XToy::TexturePaintDraw(const ColorI &paintColor)
 {
+    cout << "Bug in XToy::TexturePaintDraw\n";
     XSubToy *subToy = m_subToys[m_curSubToyIdx];
     TMesh &mesh = subToy->m_curMesh3D;
     TexPaint &texPaint = mesh.m_texPaint;
@@ -2225,6 +2234,8 @@ void XToy::TexturePaintDraw(const ColorI &paintColor)
     int colorIdx = GetPaintColorIdx(paintColor);
     texPaint.m_painterWidth = m_brushPainter.m_size / 4.0;
     Float avgLen = mesh.max_edge_len();
+
+    cout << "@@@@@@@@@@@@ " << paintColor.r << " " << paintColor.g << " " << paintColor.b << endl;
 
     if (m_brushPainter.m_type == 1)
     {

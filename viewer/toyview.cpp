@@ -89,6 +89,12 @@ static GLVec3 heat_color(float s)
 // QColor ToyView::SUBMESH_COLOR(222, 222, 222);
 // QColor ToyView::PARENT_MESH_COLOR(204, 153, 255);
 
+void ToyView::setInteractionMode(int _interactionMode)
+{
+    interactionMode = _interactionMode;
+    // std::cout << "Interaction Mode from ToyView: " << interactionMode << endl;
+}
+
 QVector<QColor> ToyView::rnd_colors = ColorManager::rndColors(200);
 
 ToyView::ToyView()
@@ -100,14 +106,14 @@ ToyView::ToyView()
 
     // sketch line
     sketchgl.setEdgePtr(&m_sketchline);
-    sketchgl.setColor(QColor(Qt::red));
+    sketchgl.setColor(QColor(Qt::black));
     sketchgl.setEdgeWidth(LINE_WIDTH);
     // outer contour
     contour_gl.setEdgePtr(&contourPts);
-    contour_gl.setColor(QColor(Qt::red));
+    contour_gl.setColor(QColor(Qt::black));
     contour_gl.setEdgeWidth(LINE_WIDTH);
     // def contour
-    defContour_gl.setColor(QColor(Qt::red));
+    defContour_gl.setColor(QColor(Qt::black));
     defCtrlPts_gl.setColor(CTRL_PT_COLOR);
     // skeleton
     m_skelGL = new SkelGL(m_toy->skel);
@@ -429,7 +435,7 @@ EdgeContainer *ToyView::getSubContourGL(int id)
         EdgeContainer *edgeContainer = m_subContourPool.Request();
         new (edgeContainer) EdgeContainer();
         m_subContourGL.push_back(edgeContainer);
-        m_subContourGL[id]->setColor(rnd_colors[id]);
+        m_subContourGL[id]->setColor(getStrokeColor());
         m_subContourGL[id]->setEdgePtr(&subContours[id]);
         return edgeContainer;
     }
@@ -876,6 +882,23 @@ bool ToyView::pickParentSubToy(const QPoint &pos, EasyGL *gl)
 
 void ToyView::update_mesh_color()
 {
+    if (interactionMode == OperationMode::OPMODE_DRAW) {
+        QColor color(getStrokeColor());
+        int idx = m_toy->m_subToys.size() - 1;
+        
+        m_subMeshGLFine[idx]->setMeshColor(color);
+        m_subMeshGLFine[idx]->compute_color();
+        m_subMeshGL3D[idx]->setMeshColor(color);
+        m_subMeshGL3D[idx]->compute_color();
+
+        for (EasyGL *v : EasyGL::EasyGLPool())
+        {
+            m_subMeshGLFine[idx]->update(v);
+            m_subMeshGL3D[idx]->update(v);
+        }
+    }
+    
+    /*
     for (int i = 0; i < static_cast<int>(m_toy->m_subToys.size()); ++i)
     {
         XSubToy *subToy = m_toy->m_subToys[i]; // ToDO: consider the situation we delete model
@@ -944,6 +967,7 @@ void ToyView::update_mesh_color()
             }
         }
     }
+    */
 }
 
 void ToyView::translate(const QPoint &pos, EasyGL *gl)
@@ -977,7 +1001,6 @@ void ToyView::rotate(int axis, const QPoint &curP, const QPoint &lastP, EasyGL *
     double angle = sign * std::acos(p01.dot(p02)) * 180.0 / M_PI;
     // qDebug() << "rotate... curP=" << curP << " lastP=" << lastP << " angle=" << angle;
     m_arcBallGL->set_cur_point(gl->Cvt2Dto3D(curP.x(), curP.y(), centroid[2]), gl);
-
     rotate(axis, angle, gl);
 }
 
@@ -1751,6 +1774,20 @@ void ToyView::updateSubToyGL()
     }
 }
 
+void ToyView::setStrokeColor(QColor strokeColor) 
+{
+    this->strokeColor = strokeColor;
+    sketchgl.setColor(strokeColor);
+    contour_gl.setColor(strokeColor);
+    defContour_gl.setColor(strokeColor);
+
+}
+
+QColor ToyView::getStrokeColor() 
+{
+    return this->strokeColor;
+}
+
 void ToyView::TexturePaintOnLBDown(QPoint point, EasyGL *gl)
 {
     bool picked = m_toy->pick_subtoy(point.x(), point.y(), gl->width(), gl->height(), gl->m_mvp.data());
@@ -2326,13 +2363,9 @@ void SkelGL::compute_drag_line(EasyGL *gl, Bone *bone)
     drag_line[1].emplace_back(down[0], down[1], down[2]);
     drag_line[1].emplace_back(last_x_only[0], last_x_only[1], last_x_only[2]);
 
-    QColor guide_color(Bone::DRAG_LINE_GUIDE_COLOR[0],
-                       Bone::DRAG_LINE_GUIDE_COLOR[1],
-                       Bone::DRAG_LINE_GUIDE_COLOR[2], 255.);
+    QColor guide_color(QColor(Qt::blue));
 
-    QColor drag_color(Bone::DRAG_LINE_COLOR[0],
-                      Bone::DRAG_LINE_COLOR[1],
-                      Bone::DRAG_LINE_COLOR[2], 255.);
+    QColor drag_color(QColor(Qt::red));
 
     dragline_container[0].setColor(guide_color);
     dragline_container[0].setEdgeWidth(2.0);
@@ -2353,7 +2386,7 @@ void ArcBallGL::update(EasyGL *gl)
 
     float point_size = 10 * gl->GetNDCDisOfOnePixelOn2D();
     point_container.setPointSize(point_size);
-    point_container.setColor(QColor(255, 0, 0));
+    point_container.setColor(QColor(0, 255, 0));
 
     dragline_container.setColor(QColor(255, 128, 0));
     dragline_container.setEdgeWidth(1.0);

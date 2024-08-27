@@ -33,6 +33,7 @@
 #include <QDragEnterEvent>
 #include <QStyleOption>
 #include <QToolTip>
+#include <iostream>
 
 namespace color_widgets
 {
@@ -49,6 +50,8 @@ namespace color_widgets
         int forced_columns;
         bool readonly; ///< Whether the palette can be modified via user interaction
 
+        ToyView *toyView;
+        void setToyView(ToyView *toyView);
         QPoint drag_pos;     ///< Point used to keep track of dragging
         int drag_index;      ///< Index used by drags
         int drop_index;      ///< Index for a requested drop
@@ -271,6 +274,11 @@ namespace color_widgets
     Swatch::~Swatch()
     {
         delete p;
+    }
+
+    void Swatch::setToyView(ToyView *toyView) 
+    {
+        this->toyView = toyView;
     }
 
     QSize Swatch::sizeHint() const
@@ -551,6 +559,9 @@ namespace color_widgets
             setSelected(index);
             p->drag_pos = event->pos();
             p->drag_index = index;
+            toyView->setStrokeColor(selectedColor());
+            // cout << "??? " << toyView->getStrokeColor().red() << " " << toyView->getStrokeColor().blue() << " " << toyView->getStrokeColor().green() << endl;
+            // std::cout << "??? " << selectedColor().red() << " " << selectedColor().blue() << " " << selectedColor().green() << "\n";
             if (index == -2)
                 Q_EMIT clicked(-1, event->modifiers());
             else if (index != -1)

@@ -2,6 +2,7 @@
 
 #include <iostream>
 #include <array>
+#include <limits>
 #include <boost/cstdint.hpp>
 #include <boost/iterator/iterator_facade.hpp>
 
@@ -37,25 +38,25 @@ public:
     /// We write -1, which is <a href="https://en.cppreference.com/w/cpp/types/numeric_limits">
     /// <tt>(std::numeric_limits<size_type>::max)()</tt></a>
     /// as `size_type` is an unsigned type.
-    explicit SM_Index(size_type _idx = (std::numeric_limits<size_type>::max)()) : idx_(_idx) {}
+    explicit SM_Index(size_type _idx = (std::numeric_limits<size_type>::max)()) : my_idx_(_idx) {}
 
     /// Get the underlying index of this index
-    operator size_type() const { return idx_; }
+    operator size_type() const { return my_idx_; }
 
     /// reset index to be invalid (index=(std::numeric_limits<size_type>::max)())
-    void reset() { idx_ = (std::numeric_limits<size_type>::max)(); }
+    void reset() { my_idx_ = (std::numeric_limits<size_type>::max)(); }
 
     /// return whether the index is valid, i.e., the index is not equal to `%(std::numeric_limits<size_type>::max)()`.
     bool is_valid() const
     {
         size_type inf = (std::numeric_limits<size_type>::max)();
-        return idx_ != inf;
+        return my_idx_ != inf;
     }
 
     // Compatibility with OpenMesh handle
     size_type idx() const
     {
-        return idx_;
+        return this->my_idx_;
     }
 
     /// increments the internal index. This operation does not
@@ -63,7 +64,7 @@ public:
     /// increment.
     SM_Index &operator++()
     {
-        ++idx_;
+        ++my_idx_;
         return *this;
     }
     /// decrements the internal index. This operation does not
@@ -71,7 +72,7 @@ public:
     /// decrement.
     SM_Index &operator--()
     {
-        --idx_;
+        --my_idx_;
         return *this;
     }
 
@@ -81,7 +82,7 @@ public:
     SM_Index operator++(int)
     {
         SM_Index tmp(*this);
-        ++idx_;
+        ++my_idx_;
         return tmp;
     }
     /// decrements the internal index. This operation does not
@@ -90,18 +91,18 @@ public:
     SM_Index operator--(int)
     {
         SM_Index tmp(*this);
-        --idx_;
+        --my_idx_;
         return tmp;
     }
 
     SM_Index operator+=(std::ptrdiff_t n)
     {
-        idx_ = size_type(std::ptrdiff_t(idx_) + n);
+        my_idx_ = size_type(std::ptrdiff_t(my_idx_) + n);
         return *this;
     }
 
 protected:
-    size_type idx_;
+    size_type my_idx_;
 };
 
 template <class T>
@@ -111,7 +112,7 @@ std::size_t hash_value(const SM_Index<T> &i)
     return ret;
 }
 
-// Implementation for Surface_mesh::Vertex_index
+// Implementation for Surface_mesh::Vertex_indexSM_Vertex_SM_Vertex_indeindex
 class SM_Vertex_index
     : public SM_Index<SM_Vertex_index>
 {
@@ -127,22 +128,27 @@ public:
     template <class T>
     bool operator<(const T &) const = delete;
 
+    size_type idx() const
+    {
+        return this->my_idx_;
+    }
+
     /// are two indices equal?
     bool operator==(const SM_Vertex_index &_rhs) const
     {
-        return this->idx_ == _rhs.idx_;
+        return this->my_idx_ == _rhs.my_idx_;
     }
 
     /// are two indices different?
     bool operator!=(const SM_Vertex_index &_rhs) const
     {
-        return this->idx_ != _rhs.idx_;
+        return this->my_idx_ != _rhs.my_idx_;
     }
 
     /// Comparison by index.
     bool operator<(const SM_Vertex_index &_rhs) const
     {
-        return this->idx_ < _rhs.idx_;
+        return this->my_idx_ < _rhs.my_idx_;
     }
 
     friend std::ostream &operator<<(std::ostream &os, SM_Vertex_index const &v)
@@ -179,19 +185,19 @@ public:
     /// are two indices equal?
     bool operator==(const SM_Halfedge_index &_rhs) const
     {
-        return this->idx_ == _rhs.idx_;
+        return this->my_idx_ == _rhs.my_idx_;
     }
 
     /// are two indices different?
     bool operator!=(const SM_Halfedge_index &_rhs) const
     {
-        return this->idx_ != _rhs.idx_;
+        return this->my_idx_ != _rhs.my_idx_;
     }
 
     /// Comparison by index.
     bool operator<(const SM_Halfedge_index &_rhs) const
     {
-        return this->idx_ < _rhs.idx_;
+        return this->my_idx_ < _rhs.my_idx_;
     }
 
     friend std::ostream &operator<<(std::ostream &os, SM_Halfedge_index const &h)
@@ -219,19 +225,19 @@ public:
     /// are two indices equal?
     bool operator==(const SM_Face_index &_rhs) const
     {
-        return this->idx_ == _rhs.idx_;
+        return this->my_idx_ == _rhs.my_idx_;
     }
 
     /// are two indices different?
     bool operator!=(const SM_Face_index &_rhs) const
     {
-        return this->idx_ != _rhs.idx_;
+        return this->my_idx_ != _rhs.my_idx_;
     }
 
     /// Comparison by index.
     bool operator<(const SM_Face_index &_rhs) const
     {
-        return this->idx_ < _rhs.idx_;
+        return this->my_idx_ < _rhs.my_idx_;
     }
 
     friend std::ostream &operator<<(std::ostream &os, SM_Face_index const &f)

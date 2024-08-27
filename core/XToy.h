@@ -77,6 +77,12 @@ public:
     // Extra weights, #V by #extra_weights Matrix of per-mesh vertex,
     // per-handle weights (probably don't partition unity)
     Eigen::MatrixXd EW;
+
+    // You maintain the integrity of the original rig (OW), 
+    // which handles the primary movement.
+    // You add new influences (EW) in a modular way without 
+    // disrupting the original setup.
+
     // #V by
     // min(#original_weights+#extra_weights,MAX_NUM_WEIGHTS_PER_VERTEX)
     // Matrix of per-mesh vertex, per-handle weights sorted by value

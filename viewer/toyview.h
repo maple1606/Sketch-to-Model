@@ -174,6 +174,11 @@ public:
     // ------------------------Painting------------------------------------------
 
 public:
+    // Sketch
+    void setStrokeColor(QColor color);
+    QColor getStrokeColor();
+
+    // Texture
     void TexturePaintOnLBDown(QPoint point, EasyGL *gl);
     void TexturePaintDraw();
     void TextureImageOnLBDown(QPoint point, EasyGL *gl) {}
@@ -194,11 +199,16 @@ public:
 public:
     //--------------------------Common Settings-------------------------------------
     static QVector<QColor> rnd_colors;
+    void setInteractionMode(int _interactionMode);
 
 private:
+    // interaction mode
+    int interactionMode;
+
     //--------------------------Lines-------------------------------------
     // user-input sketch_line
     EdgeContainer sketchgl;
+    QColor strokeColor;
 
     // body-outer contour
     EdgeContainer contour_gl; // silouette

@@ -28,7 +28,11 @@ public:
     virtual void draw(EasyGL *gl){};
 
     // invariant behaviors, provide mandatory implementation
-    void setColor(const QColor &color_) { color = color_; }
+    void setColor(const QColor &color_) 
+    { 
+        color = color_; 
+        // cout << "!!! " << color.red() << " " << color.blue() << " " << color.green() << endl;
+    }
     void update(EasyGL *gl) { is_bind[gl] = false; }
 
 protected:

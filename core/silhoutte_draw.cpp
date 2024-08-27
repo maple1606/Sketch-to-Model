@@ -15,7 +15,7 @@ void draw_silhoutte(const std::vector<Pnt3> &sil,
     for (int i = 0; i < n; ++i)
     {
         pts.push_back(cv::Point(sil[i].x() + 20, sil[i].y() + 20));
-        cv::circle(img, pts[i], 8, cv::Scalar(0, 0, 255), -1);
+        cv::circle(img, pts[i], 8, cv::Scalar(255, 0, 0), -1);
     }
 
     for (int i = 0; i < n; ++i)

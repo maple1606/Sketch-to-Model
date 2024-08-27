@@ -8,6 +8,7 @@
 #include "SMesh.h"
 
 //---------------------------------------STL Library--------------------------------
+#define BOOST_BIND_GLOBAL_PLACEHOLDERS
 #include <vector>
 #include <string>
 #include <iostream>

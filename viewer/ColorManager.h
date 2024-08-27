@@ -1,9 +1,12 @@
 #pragma once
 #include <QColor>
+#include "color_palette_widget.h"
 
 class ColorManager
 {
 public:
+    QColor selectedColor;
+
     static QVector<QColor> rndColors(int count)
     {
         QVector<QColor> colors;

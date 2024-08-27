@@ -253,6 +253,7 @@ EasyGL::EasyGL(QWidget *parent, EasyGL *sharedViewer)
     if (m_sharedViewer == nullptr) // add main viewer
     {
         m_curView = new ToyView();
+        m_curView->setInteractionMode(m_opMode);
         m_isNewViewer = false;
     }
     else
@@ -501,6 +502,7 @@ void EasyGL::SetViewMatByTrackBall()
 
 void EasyGL::mousePressEvent(QMouseEvent *event)
 {
+    m_curView->setInteractionMode(m_opMode);
     if (m_isNewViewer) //To prevent the default click when adding a subViewer
     {
         m_isNewViewer = false;
@@ -821,7 +823,7 @@ void EasyGL::keyPressEvent(QKeyEvent *e)
 {
 
     // qDebug() << __FILE__ << " " << __LINE__ << " EasyGL " << this;
-
+    m_curView->setInteractionMode(m_opMode);
     if (!e->modifiers())
     {
         if (e->key() == Qt::Key_Delete)

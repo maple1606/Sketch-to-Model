@@ -19,7 +19,7 @@ if(MSVC) # Windows
   set(Boost_INCLUDE_DIR E:/thirdparty/boost_1_74_0) # !!! set "your own path"
   set(BOOST_LIBRARYDIR E:/thirdparty/boost_1_74_0/lib64-msvc-14.2) # !!! set "your own path"
 else() # Unix
-  set(QT_INSTALL_PATH /opt/Qt5.12.2/5.10.0/gcc_64) # !!! set "your own QT install path"
+  set(QT_INSTALL_PATH /opt/Qt5.12.2/5.12.2/gcc_64) # !!! set "your own QT install path"
   # Change Qt Dir if there is multiple Qt versions in your system
   # https://unix.stackexchange.com/questions/414904/anaconda-qt-vs-system-qt
   file( GLOB_RECURSE sres ${QT_INSTALL_PATH}/*/Qt5Config.cmake )
@@ -47,11 +47,21 @@ find_package(Qt5Gui REQUIRED)
 find_package(Qt5Core REQUIRED)
 find_package(Qt5OpenGL REQUIRED)
 
-include_directories(${Qt5Widgets_INCLUDE_DIRS})
-include_directories(${Qt5Gui_INCLUDE_DIRS})
-include_directories(${Qt5Core_INCLUDE_DIRS})
-include_directories(${Qt5OpenGL_INCLUDE_DIRS})
+# Include directories for Qt and other libraries
+include_directories(
+  ${Qt5Widgets_INCLUDE_DIRS}
+  ${Qt5Gui_INCLUDE_DIRS}
+  ${Qt5Core_INCLUDE_DIRS}
+  ${Qt5OpenGL_INCLUDE_DIRS}  # Add if needed
+  ${OpenCV_INCLUDE_DIRS}
+  ${Boost_INCLUDE_DIR}       # Add if needed
+)
 
+# Set Qt-specific options
+set(CMAKE_INCLUDE_CURRENT_DIR ON)
+set(CMAKE_AUTOMOC ON)
+set(CMAKE_AUTOUIC ON)
+set(CMAKE_AUTORCC ON)
 
 add_subdirectory(core) # my own library milk
 add_subdirectory(viewer)

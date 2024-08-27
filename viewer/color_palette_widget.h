@@ -24,7 +24,9 @@
 
 #include <QWidget>
 #include <QPen>
+#include <iostream>
 #include "color_palette.h"
+#include "toyview.h"
 
 namespace color_widgets
 {
@@ -114,6 +116,7 @@ namespace color_widgets
       QSize sizeHint() const Q_DECL_OVERRIDE;
       QSize minimumSizeHint() const Q_DECL_OVERRIDE;
 
+      ToyView *toyView;
       const ColorPalette &palette() const;
       ColorPalette &palette();
       int selected() const;
@@ -133,8 +136,9 @@ namespace color_widgets
      * \brief Color at the given position within the widget
      * \param p Point in local coordinates
      */
-      QColor colorAt(const QPoint &p);
 
+      QColor colorAt(const QPoint &p);
+      void setToyView(ToyView *toyView);
       QSize colorSize() const;
       QSize maxColorSize() const;
       ColorSizePolicy colorSizePolicy() const;

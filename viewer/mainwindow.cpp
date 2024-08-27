@@ -63,6 +63,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent),
     palette.appendColor(QColor(64, 224, 208));  // 27
 
     color_picker = new color_widgets::Swatch(this);
+    color_picker->setToyView(toyview);
     ui->centralWidget->layout()->addWidget(color_picker);
     color_picker->setPalette(palette);
     color_picker->setFixedSize(350, 50);

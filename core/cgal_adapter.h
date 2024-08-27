@@ -3,6 +3,7 @@
 class TMesh;
 
 #include <CGAL/Exact_predicates_inexact_constructions_kernel.h>
+#include <CGAL/Surface_mesh/Surface_mesh.h>
 #include <CGAL/Surface_mesh.h>
 
 namespace cgal_adapter

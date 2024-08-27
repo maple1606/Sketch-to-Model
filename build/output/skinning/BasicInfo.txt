@@ -1,4 +1,4 @@
-name:20240827_142604
-num_subToys:2
-curSubToyIdx:1
+name:20240827_143915
+num_subToys:1
+curSubToyIdx:0
 parentToyIdx:0
