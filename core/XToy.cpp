@@ -1350,10 +1350,10 @@ void applySpringingEffect(
     Eigen::MatrixXd& cpuV,       
     Eigen::MatrixXd& velocities, 
     const Eigen::MatrixXd& restV, 
-    double k,                  
-    double c,                  
-    double mass,                
-    double deltaTime            
+    double k = 40.0f,               // stifness                 
+    double c,                       // damping coefficient             
+    double mass,                    // mass of each vertex          
+    double deltaTime = 1.0 / 60.0 / 20.0
 ) {
     for (int i = 0; i < cpuV.rows(); ++i) {
         Eigen::Vector3d currentPos = cpuV.row(i);
@@ -1361,9 +1361,7 @@ void applySpringingEffect(
         Eigen::Vector3d velocity = velocities.row(i);
 
         Eigen::Vector3d springForce = -k * (currentPos - restPos);
-
         Eigen::Vector3d dampingForce = -c * velocity;
-
         Eigen::Vector3d totalForce = springForce + dampingForce;
 
         // F = ma <=> a = F/m
@@ -1408,7 +1406,8 @@ bool XToy::drag_bone(int sx, int sy,
             cpuV = M * T.transpose();
 
             // ToDO: implement numeric springing to create bounce effect
-            // applySpringingEffect(cpuV);
+            Geometry::compute_mesh_mass(cpuV, F, face_mass, vert_mass, rho);
+            applySpringingEffect(cpuV);
 
             m_mesh3D.CreateHalfedgeMesh(cpuV, F);
             // WritePly(m_mesh3D, "output/deformed3D.ply");

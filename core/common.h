@@ -285,3 +285,47 @@ inline bool IsZero(double x)
 {
     return std::fabs(x - 0) < 1e-14;
 }
+
+namespace Geometry {
+    
+    double computeArea(Vecxd vec1, Vecxd vec2) {
+        if (vec1.size() != vec2.size()) {
+            throw std::runtime_error("computeArea: vec1.size() != vec2.size()");
+        }
+        double area = 0.0;
+        if (vec1.size() == 2) {
+            area = std::abs(0.5 * (vec1(0) * vec2(1) - vec1(1) * vec2(0)));
+        } else if (vec1.size() == 3) {
+            Vec3d v1 = vec1;
+            Vec3d v2 = vec2;
+            area = 0.5 * (v1.cross(v2)).norm();
+        } else {
+            throw std::runtime_error("computeArea: vec1.size() != 2 or 3");
+        }
+        return area;
+    }
+
+
+    void compute_mesh_mass(const MatxXd& verts, const Matx3i& faces,
+                        Vecxd& face_mass, Vecxd& vert_mass, double rho) {
+        int n_faces = faces.rows();
+        int n_verts = verts.rows();
+        face_mass.resize(n_faces);
+        vert_mass.resize(n_verts);
+        vert_mass.setZero();
+        for (int i = 0; i < n_faces; i++) {
+            int i1 = faces(i, 0);
+            int i2 = faces(i, 1);
+            int i3 = faces(i, 2);
+            Vecxd v1 = verts.row(i1);
+            Vecxd v2 = verts.row(i2) - v1.transpose();
+            Vecxd v3 = verts.row(i3) - v1.transpose();
+            double area = abs(computeArea(v2, v3) * rho);
+            face_mass(i) = area;
+            vert_mass(i1) += area / 3.0f;
+            vert_mass(i2) += area / 3.0f;
+            vert_mass(i3) += area / 3.0f;
+        }
+    }
+
+}
