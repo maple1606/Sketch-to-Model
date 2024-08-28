@@ -1346,6 +1346,39 @@ void XToy::gather_subT(int width, int height, float *mvpMatrix, XSubToy *subToy)
     }
 }
 
+void applySpringingEffect(
+    Eigen::MatrixXd& cpuV,       
+    Eigen::MatrixXd& velocities, 
+    const Eigen::MatrixXd& restV, 
+    double k,                  
+    double c,                  
+    double mass,                
+    double deltaTime            
+) {
+    for (int i = 0; i < cpuV.rows(); ++i) {
+        Eigen::Vector3d currentPos = cpuV.row(i);
+        Eigen::Vector3d restPos = restV.row(i);
+        Eigen::Vector3d velocity = velocities.row(i);
+
+        Eigen::Vector3d springForce = -k * (currentPos - restPos);
+
+        Eigen::Vector3d dampingForce = -c * velocity;
+
+        Eigen::Vector3d totalForce = springForce + dampingForce;
+
+        // F = ma <=> a = F/m
+        Eigen::Vector3d acceleration = totalForce / mass;
+
+        velocity += acceleration * deltaTime;
+
+        currentPos += velocity * deltaTime;
+
+        cpuV.row(i) = currentPos;
+        velocities.row(i) = velocity;
+    }
+}
+
+
 bool XToy::drag_bone(int sx, int sy,
                      int width, int height,
                      float *viewMatrix, float *mvpMatrix,
@@ -1368,10 +1401,15 @@ bool XToy::drag_bone(int sx, int sy,
             if (auto_dof)
             {   
                 // compute the transformation matrix
+                cout << ":)))))))))\n";
                 transformations();
             }
 
             cpuV = M * T.transpose();
+
+            // ToDO: implement numeric springing to create bounce effect
+            // applySpringingEffect(cpuV);
+
             m_mesh3D.CreateHalfedgeMesh(cpuV, F);
             // WritePly(m_mesh3D, "output/deformed3D.ply");
         }
@@ -1651,6 +1689,9 @@ bool XToy::transformations()
     //ToDO
     if (auto_dof)
     {
+        // uses an ARAP-based optimization to adjust the transformations 
+        // minimize distortion and ensure smooth deformations
+
         // number of handles
         int m = arap_dof.m;
         int dim = arap_dof.dim;

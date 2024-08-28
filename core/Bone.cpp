@@ -418,8 +418,8 @@ Eigen::Vector3d Bone::rest_tail() const
     return parent->rest_tip();
 }
 
-// Returns the current affine transformation via Forward Kinematics of this
-// bone
+// Returns the current affine transformation via Forward Kinematics of this bone
+// a combination of rotation and translation
 Eigen::Transform<double, 3, Eigen::Affine> Bone::affine() const
 {
     // assert(stretch == 1);
@@ -433,6 +433,8 @@ Eigen::Transform<double, 3, Eigen::Affine> Bone::affine() const
     {
         p_affine = parent->affine();
     }
+    // calculates one's transformation by first calculating its parent's transformation. 
+    // gotta make sure that all bones are positioned relative to their parent
     return p_affine.rotate(rotation).translate(translation);
 }
 

@@ -30,12 +30,15 @@ inline bool gather_transformations(
         Bone *b = (*bit);
         if (b->get_wi() >= 0)
         {
+            // the weight index is used to determine if a bone influences the deformation of the mesh
             num_handles++;
         }
     }
+
+    // each transformation is a 3x4 affine matrix
     T.resize(3, num_handles * 4);
 
-    map<const Bone *, int> B2I;
+    map<const Bone *, int> B2I; // bone to integer
     B2I[NULL] = -1;
     int i = 0;
     for (vector<Bone *>::iterator bit = B.begin(); bit != B.end(); bit++)
