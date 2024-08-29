@@ -6,6 +6,7 @@
 #include <QOpenGLBuffer>
 #include <QOpenGLVertexArrayObject>
 #include <QImage>
+#include <QElapsedTimer>
 
 #include <vector>
 
@@ -99,6 +100,15 @@ public:
 private:
     void setDepthState();
     void setTransparentState();
+
+    QElapsedTimer timer;
+    QPoint currentPos;
+    QPoint lastPos;
+    QVector2D lastVelocity;
+    QVector2D lastAcceleration;
+    bool isDragging;
+
+    const double deltaTime = 0.33333; 
 
 public:
     //--------------------------Background Image -------------------------------------

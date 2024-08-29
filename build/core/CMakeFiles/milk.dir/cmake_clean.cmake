@@ -12,6 +12,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/milk.dir/CSpline.cpp.o.d"
   "CMakeFiles/milk.dir/ContourExtractor.cpp.o"
   "CMakeFiles/milk.dir/ContourExtractor.cpp.o.d"
+  "CMakeFiles/milk.dir/MassSpringSystem.cpp.o"
+  "CMakeFiles/milk.dir/MassSpringSystem.cpp.o.d"
   "CMakeFiles/milk.dir/MeshDecomposer.cpp.o"
   "CMakeFiles/milk.dir/MeshDecomposer.cpp.o.d"
   "CMakeFiles/milk.dir/PixelImage.cpp.o"

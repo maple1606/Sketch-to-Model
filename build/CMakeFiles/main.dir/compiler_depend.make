@@ -2572,6 +2572,8 @@ CMakeFiles/main.dir/main.cpp.o: ../main.cpp \
   ../viewer/EasyGL.h \
   /usr/include/x86_64-linux-gnu/qt5/QtGui/QImage \
   /usr/include/x86_64-linux-gnu/qt5/QtGui/qimage.h \
+  /usr/include/x86_64-linux-gnu/qt5/QtCore/QElapsedTimer \
+  /usr/include/x86_64-linux-gnu/qt5/QtCore/qelapsedtimer.h \
   /usr/include/opencv4/opencv2/opencv.hpp \
   /usr/include/opencv4/opencv2/opencv_modules.hpp \
   /usr/include/opencv4/opencv2/core.hpp \
@@ -3050,6 +3052,8 @@ CMakeFiles/main.dir/main_autogen/mocs_compilation.cpp.o: main_autogen/mocs_compi
   /usr/include/x86_64-linux-gnu/qt5/QtCore/qobject.h \
   /usr/include/x86_64-linux-gnu/qt5/QtGui/QImage \
   /usr/include/x86_64-linux-gnu/qt5/QtGui/qimage.h \
+  /usr/include/x86_64-linux-gnu/qt5/QtCore/QElapsedTimer \
+  /usr/include/x86_64-linux-gnu/qt5/QtCore/qelapsedtimer.h \
   /usr/include/opencv4/opencv2/opencv.hpp \
   /usr/include/opencv4/opencv2/opencv_modules.hpp \
   /usr/include/opencv4/opencv2/core.hpp \
@@ -5799,6 +5803,8 @@ CMakeFiles/main.dir/viewer/BoneComplexityDialog.cpp.o: ../viewer/BoneComplexityD
   /usr/include/x86_64-linux-gnu/qt5/QtCore/qobject.h \
   /usr/include/x86_64-linux-gnu/qt5/QtGui/QImage \
   /usr/include/x86_64-linux-gnu/qt5/QtGui/qimage.h \
+  /usr/include/x86_64-linux-gnu/qt5/QtCore/QElapsedTimer \
+  /usr/include/x86_64-linux-gnu/qt5/QtCore/qelapsedtimer.h \
   /usr/include/opencv4/opencv2/opencv.hpp \
   /usr/include/opencv4/opencv2/opencv_modules.hpp \
   /usr/include/opencv4/opencv2/core.hpp \
@@ -8990,7 +8996,6 @@ CMakeFiles/main.dir/viewer/Detector.cpp.o: ../viewer/Detector.cpp \
   /usr/include/x86_64-linux-gnu/c++/11/bits/basic_file.h \
   /usr/include/x86_64-linux-gnu/c++/11/bits/c++io.h \
   /usr/include/c++/11/bits/fstream.tcc \
-  ../external/libigl/external/eigen/Eigen/Eigen \
   ../external/libigl/external/eigen/Eigen/Dense \
   ../external/libigl/external/eigen/Eigen/Core \
   ../external/libigl/external/eigen/Eigen/src/Core/util/DisableStupidWarnings.h \
@@ -9167,6 +9172,8 @@ CMakeFiles/main.dir/viewer/Detector.cpp.o: ../viewer/Detector.cpp \
   ../external/libigl/external/eigen/Eigen/src/Eigenvalues/GeneralizedEigenSolver.h \
   ../external/libigl/external/eigen/Eigen/src/Eigenvalues/RealQZ.h \
   ../external/libigl/external/eigen/Eigen/src/Eigenvalues/MatrixBaseEigenvalues.h \
+  ../external/libigl/external/eigen/Eigen/Eigen \
+  ../external/libigl/external/eigen/Eigen/Dense \
   ../external/libigl/external/eigen/Eigen/Sparse \
   ../external/libigl/external/eigen/Eigen/SparseCore \
   ../external/libigl/external/eigen/Eigen/src/SparseCore/SparseUtil.h \
@@ -10212,7 +10219,6 @@ CMakeFiles/main.dir/viewer/EasyGL.cpp.o: ../viewer/EasyGL.cpp \
   /usr/include/x86_64-linux-gnu/c++/11/bits/basic_file.h \
   /usr/include/x86_64-linux-gnu/c++/11/bits/c++io.h \
   /usr/include/c++/11/bits/fstream.tcc \
-  ../external/libigl/external/eigen/Eigen/Eigen \
   ../external/libigl/external/eigen/Eigen/Dense \
   ../external/libigl/external/eigen/Eigen/Core \
   ../external/libigl/external/eigen/Eigen/src/Core/util/DisableStupidWarnings.h \
@@ -10389,6 +10395,8 @@ CMakeFiles/main.dir/viewer/EasyGL.cpp.o: ../viewer/EasyGL.cpp \
   ../external/libigl/external/eigen/Eigen/src/Eigenvalues/GeneralizedEigenSolver.h \
   ../external/libigl/external/eigen/Eigen/src/Eigenvalues/RealQZ.h \
   ../external/libigl/external/eigen/Eigen/src/Eigenvalues/MatrixBaseEigenvalues.h \
+  ../external/libigl/external/eigen/Eigen/Eigen \
+  ../external/libigl/external/eigen/Eigen/Dense \
   ../external/libigl/external/eigen/Eigen/Sparse \
   ../external/libigl/external/eigen/Eigen/SparseCore \
   ../external/libigl/external/eigen/Eigen/src/SparseCore/SparseUtil.h \
@@ -10500,6 +10508,8 @@ CMakeFiles/main.dir/viewer/EasyGL.cpp.o: ../viewer/EasyGL.cpp \
   /usr/include/x86_64-linux-gnu/qt5/QtCore/qobject.h \
   /usr/include/x86_64-linux-gnu/qt5/QtGui/QImage \
   /usr/include/x86_64-linux-gnu/qt5/QtGui/qimage.h \
+  /usr/include/x86_64-linux-gnu/qt5/QtCore/QElapsedTimer \
+  /usr/include/x86_64-linux-gnu/qt5/QtCore/qelapsedtimer.h \
   ../viewer/Viewer_interface.h \
   /usr/include/x86_64-linux-gnu/qt5/QtWidgets/QOpenGLWidget \
   /usr/include/x86_64-linux-gnu/qt5/QtWidgets/qopenglwidget.h \
@@ -10522,7 +10532,6 @@ CMakeFiles/main.dir/viewer/EasyGL.cpp.o: ../viewer/EasyGL.cpp \
   ../external/libigl/include/igl/NormalType.h \
   ../external/libigl/include/igl/arap_dof.h \
   ../external/libigl/include/igl/igl_inline.h \
-  ../external/libigl/external/eigen/Eigen/Dense \
   ../external/libigl/include/igl/ARAPEnergyType.h \
   ../core/MemoryPool.h \
   /usr/include/c++/11/unordered_set \
@@ -12750,6 +12759,8 @@ CMakeFiles/main.dir/viewer/SetInfoDialog.cpp.o: ../viewer/SetInfoDialog.cpp \
   /usr/include/x86_64-linux-gnu/qt5/QtCore/qobject.h \
   /usr/include/x86_64-linux-gnu/qt5/QtGui/QImage \
   /usr/include/x86_64-linux-gnu/qt5/QtGui/qimage.h \
+  /usr/include/x86_64-linux-gnu/qt5/QtCore/QElapsedTimer \
+  /usr/include/x86_64-linux-gnu/qt5/QtCore/qelapsedtimer.h \
   /usr/include/opencv4/opencv2/opencv.hpp \
   /usr/include/opencv4/opencv2/opencv_modules.hpp \
   /usr/include/opencv4/opencv2/core.hpp \
@@ -15895,7 +15906,6 @@ CMakeFiles/main.dir/viewer/SymetryDialog.cpp.o: ../viewer/SymetryDialog.cpp \
   /usr/include/c++/11/bits/hashtable_policy.h \
   /usr/include/c++/11/bits/enable_special_members.h \
   /usr/include/c++/11/bits/unordered_map.h \
-  ../external/libigl/external/eigen/Eigen/Eigen \
   ../external/libigl/external/eigen/Eigen/Dense \
   ../external/libigl/external/eigen/Eigen/Core \
   ../external/libigl/external/eigen/Eigen/src/Core/util/DisableStupidWarnings.h \
@@ -16077,6 +16087,8 @@ CMakeFiles/main.dir/viewer/SymetryDialog.cpp.o: ../viewer/SymetryDialog.cpp \
   ../external/libigl/external/eigen/Eigen/src/Eigenvalues/GeneralizedEigenSolver.h \
   ../external/libigl/external/eigen/Eigen/src/Eigenvalues/RealQZ.h \
   ../external/libigl/external/eigen/Eigen/src/Eigenvalues/MatrixBaseEigenvalues.h \
+  ../external/libigl/external/eigen/Eigen/Eigen \
+  ../external/libigl/external/eigen/Eigen/Dense \
   ../external/libigl/external/eigen/Eigen/Sparse \
   ../external/libigl/external/eigen/Eigen/SparseCore \
   ../external/libigl/external/eigen/Eigen/src/SparseCore/SparseUtil.h \
@@ -16211,6 +16223,8 @@ CMakeFiles/main.dir/viewer/SymetryDialog.cpp.o: ../viewer/SymetryDialog.cpp \
   /usr/include/x86_64-linux-gnu/qt5/QtCore/qobject.h \
   /usr/include/x86_64-linux-gnu/qt5/QtGui/QImage \
   /usr/include/x86_64-linux-gnu/qt5/QtGui/qimage.h \
+  /usr/include/x86_64-linux-gnu/qt5/QtCore/QElapsedTimer \
+  /usr/include/x86_64-linux-gnu/qt5/QtCore/qelapsedtimer.h \
   /usr/include/opencv4/opencv2/opencv.hpp \
   /usr/include/opencv4/opencv2/opencv_modules.hpp \
   /usr/include/opencv4/opencv2/core.hpp \
@@ -16361,7 +16375,6 @@ CMakeFiles/main.dir/viewer/SymetryDialog.cpp.o: ../viewer/SymetryDialog.cpp \
   ../external/libigl/include/igl/NormalType.h \
   ../external/libigl/include/igl/arap_dof.h \
   ../external/libigl/include/igl/igl_inline.h \
-  ../external/libigl/external/eigen/Eigen/Dense \
   ../external/libigl/include/igl/ARAPEnergyType.h \
   ../core/MemoryPool.h \
   /usr/include/c++/11/unordered_set \
@@ -18613,7 +18626,6 @@ CMakeFiles/main.dir/viewer/SymmetryAxisDialog.cpp.o: ../viewer/SymmetryAxisDialo
   /usr/include/c++/11/bits/hashtable_policy.h \
   /usr/include/c++/11/bits/enable_special_members.h \
   /usr/include/c++/11/bits/unordered_map.h \
-  ../external/libigl/external/eigen/Eigen/Eigen \
   ../external/libigl/external/eigen/Eigen/Dense \
   ../external/libigl/external/eigen/Eigen/Core \
   ../external/libigl/external/eigen/Eigen/src/Core/util/DisableStupidWarnings.h \
@@ -18795,6 +18807,8 @@ CMakeFiles/main.dir/viewer/SymmetryAxisDialog.cpp.o: ../viewer/SymmetryAxisDialo
   ../external/libigl/external/eigen/Eigen/src/Eigenvalues/GeneralizedEigenSolver.h \
   ../external/libigl/external/eigen/Eigen/src/Eigenvalues/RealQZ.h \
   ../external/libigl/external/eigen/Eigen/src/Eigenvalues/MatrixBaseEigenvalues.h \
+  ../external/libigl/external/eigen/Eigen/Eigen \
+  ../external/libigl/external/eigen/Eigen/Dense \
   ../external/libigl/external/eigen/Eigen/Sparse \
   ../external/libigl/external/eigen/Eigen/SparseCore \
   ../external/libigl/external/eigen/Eigen/src/SparseCore/SparseUtil.h \
@@ -18927,6 +18941,8 @@ CMakeFiles/main.dir/viewer/SymmetryAxisDialog.cpp.o: ../viewer/SymmetryAxisDialo
   /usr/include/x86_64-linux-gnu/qt5/QtCore/qobject.h \
   /usr/include/x86_64-linux-gnu/qt5/QtGui/QImage \
   /usr/include/x86_64-linux-gnu/qt5/QtGui/qimage.h \
+  /usr/include/x86_64-linux-gnu/qt5/QtCore/QElapsedTimer \
+  /usr/include/x86_64-linux-gnu/qt5/QtCore/qelapsedtimer.h \
   /usr/include/opencv4/opencv2/opencv.hpp \
   /usr/include/opencv4/opencv2/opencv_modules.hpp \
   /usr/include/opencv4/opencv2/core.hpp \
@@ -19077,7 +19093,6 @@ CMakeFiles/main.dir/viewer/SymmetryAxisDialog.cpp.o: ../viewer/SymmetryAxisDialo
   ../external/libigl/include/igl/NormalType.h \
   ../external/libigl/include/igl/arap_dof.h \
   ../external/libigl/include/igl/igl_inline.h \
-  ../external/libigl/external/eigen/Eigen/Dense \
   ../external/libigl/include/igl/ARAPEnergyType.h \
   ../core/MemoryPool.h \
   /usr/include/c++/11/unordered_set \
@@ -24195,6 +24210,8 @@ CMakeFiles/main.dir/viewer/containers.cpp.o: ../viewer/containers.cpp \
   /usr/include/x86_64-linux-gnu/qt5/QtGui/qmatrix4x4.h \
   /usr/include/x86_64-linux-gnu/qt5/QtGui/QImage \
   /usr/include/x86_64-linux-gnu/qt5/QtGui/qimage.h \
+  /usr/include/x86_64-linux-gnu/qt5/QtCore/QElapsedTimer \
+  /usr/include/x86_64-linux-gnu/qt5/QtCore/qelapsedtimer.h \
   /usr/include/opencv4/opencv2/opencv.hpp \
   /usr/include/opencv4/opencv2/opencv_modules.hpp \
   /usr/include/opencv4/opencv2/core.hpp \
@@ -29110,6 +29127,8 @@ CMakeFiles/main.dir/viewer/mainwindow.cpp.o: ../viewer/mainwindow.cpp \
   ../viewer/EasyGL.h \
   /usr/include/x86_64-linux-gnu/qt5/QtGui/QImage \
   /usr/include/x86_64-linux-gnu/qt5/QtGui/qimage.h \
+  /usr/include/x86_64-linux-gnu/qt5/QtCore/QElapsedTimer \
+  /usr/include/x86_64-linux-gnu/qt5/QtCore/qelapsedtimer.h \
   /usr/include/opencv4/opencv2/opencv.hpp \
   /usr/include/opencv4/opencv2/opencv_modules.hpp \
   /usr/include/opencv4/opencv2/core.hpp \
@@ -30049,7 +30068,6 @@ CMakeFiles/main.dir/viewer/toyview.cpp.o: ../viewer/toyview.cpp \
   /usr/include/c++/11/bits/hashtable_policy.h \
   /usr/include/c++/11/bits/enable_special_members.h \
   /usr/include/c++/11/bits/unordered_map.h \
-  ../external/libigl/external/eigen/Eigen/Eigen \
   ../external/libigl/external/eigen/Eigen/Dense \
   ../external/libigl/external/eigen/Eigen/Core \
   ../external/libigl/external/eigen/Eigen/src/Core/util/DisableStupidWarnings.h \
@@ -30231,6 +30249,8 @@ CMakeFiles/main.dir/viewer/toyview.cpp.o: ../viewer/toyview.cpp \
   ../external/libigl/external/eigen/Eigen/src/Eigenvalues/GeneralizedEigenSolver.h \
   ../external/libigl/external/eigen/Eigen/src/Eigenvalues/RealQZ.h \
   ../external/libigl/external/eigen/Eigen/src/Eigenvalues/MatrixBaseEigenvalues.h \
+  ../external/libigl/external/eigen/Eigen/Eigen \
+  ../external/libigl/external/eigen/Eigen/Dense \
   ../external/libigl/external/eigen/Eigen/Sparse \
   ../external/libigl/external/eigen/Eigen/SparseCore \
   ../external/libigl/external/eigen/Eigen/src/SparseCore/SparseUtil.h \
@@ -31882,7 +31902,6 @@ CMakeFiles/main.dir/viewer/toyview.cpp.o: ../viewer/toyview.cpp \
   ../core/XToy.h \
   ../external/libigl/include/igl/NormalType.h \
   ../external/libigl/include/igl/arap_dof.h \
-  ../external/libigl/external/eigen/Eigen/Dense \
   ../external/libigl/include/igl/ARAPEnergyType.h \
   ../core/ssnode_with_subtoy_info.h \
   ../core/Animation.h \
@@ -31920,6 +31939,8 @@ CMakeFiles/main.dir/viewer/toyview.cpp.o: ../viewer/toyview.cpp \
   ../viewer/EasyGL.h \
   /usr/include/x86_64-linux-gnu/qt5/QtGui/QImage \
   /usr/include/x86_64-linux-gnu/qt5/QtGui/qimage.h \
+  /usr/include/x86_64-linux-gnu/qt5/QtCore/QElapsedTimer \
+  /usr/include/x86_64-linux-gnu/qt5/QtCore/qelapsedtimer.h \
   ../viewer/trackball.h \
   /usr/include/x86_64-linux-gnu/qt5/QtGui/QVector3D \
   /usr/include/x86_64-linux-gnu/qt5/QtGui/qvector3d.h \
@@ -32566,6 +32587,10 @@ main_autogen/P7J7ZO6AYM/moc_SetInfoDialog.cpp:
 /usr/include/opencv4/opencv2/core/hal/interface.h:
 
 /usr/include/opencv4/opencv2/core/cvdef.h:
+
+/usr/include/x86_64-linux-gnu/qt5/QtCore/qelapsedtimer.h:
+
+/usr/include/x86_64-linux-gnu/qt5/QtCore/QElapsedTimer:
 
 /usr/include/x86_64-linux-gnu/qt5/QtGui/QImage:
 

@@ -24,6 +24,7 @@
 #endif
 
 //---------------------------------------Eigen--------------------------------------
+#include <Eigen/Dense>
 #include <Eigen/Eigen>
 #include <Eigen/Sparse>
 
@@ -44,6 +45,8 @@ typedef Eigen::Vector2d Vec2;
 typedef Eigen::Vector3d Pnt3;
 typedef Eigen::Vector3d Vec3;
 typedef Eigen::Vector2i CPoint;
+typedef Eigen::MatrixXd MatXd;
+typedef Eigen::MatrixXi MatXi;
 
 // surface mesh
 typedef Surface_mesh<Pnt3> SMesh;
@@ -286,9 +289,9 @@ inline bool IsZero(double x)
     return std::fabs(x - 0) < 1e-14;
 }
 
-namespace Geometry {
+namespace GeometryHelper {
     
-    double computeArea(Vecxd vec1, Vecxd vec2) {
+    inline double computeArea(Vec3 vec1, Vec3 vec2) {
         if (vec1.size() != vec2.size()) {
             throw std::runtime_error("computeArea: vec1.size() != vec2.size()");
         }
@@ -296,8 +299,8 @@ namespace Geometry {
         if (vec1.size() == 2) {
             area = std::abs(0.5 * (vec1(0) * vec2(1) - vec1(1) * vec2(0)));
         } else if (vec1.size() == 3) {
-            Vec3d v1 = vec1;
-            Vec3d v2 = vec2;
+            Vec3 v1 = vec1;
+            Vec3 v2 = vec2;
             area = 0.5 * (v1.cross(v2)).norm();
         } else {
             throw std::runtime_error("computeArea: vec1.size() != 2 or 3");
@@ -306,8 +309,8 @@ namespace Geometry {
     }
 
 
-    void compute_mesh_mass(const MatxXd& verts, const Matx3i& faces,
-                        Vecxd& face_mass, Vecxd& vert_mass, double rho) {
+    inline void compute_mesh_mass(const MatXd& verts, const MatXi& faces,
+                        Vec3& face_mass, Vec3& vert_mass, double rho) {
         int n_faces = faces.rows();
         int n_verts = verts.rows();
         face_mass.resize(n_faces);
@@ -317,9 +320,9 @@ namespace Geometry {
             int i1 = faces(i, 0);
             int i2 = faces(i, 1);
             int i3 = faces(i, 2);
-            Vecxd v1 = verts.row(i1);
-            Vecxd v2 = verts.row(i2) - v1.transpose();
-            Vecxd v3 = verts.row(i3) - v1.transpose();
+            Vec3 v1 = verts.row(i1);
+            Vec3 v2 = verts.row(i2) - v1.transpose();
+            Vec3 v3 = verts.row(i3) - v1.transpose();
             double area = abs(computeArea(v2, v3) * rho);
             face_mass(i) = area;
             vert_mass(i1) += area / 3.0f;

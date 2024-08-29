@@ -312,7 +312,7 @@ CMakeFiles/main.dir/clean:
 CMakeFiles/main_autogen.dir/all: core/CMakeFiles/milk.dir/all
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/main_autogen.dir/build.make CMakeFiles/main_autogen.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/main_autogen.dir/build.make CMakeFiles/main_autogen.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/lemoontear/github/RealSkel/build/CMakeFiles --progress-num=94 "Built target main_autogen"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/lemoontear/github/RealSkel/build/CMakeFiles --progress-num= "Built target main_autogen"
 .PHONY : CMakeFiles/main_autogen.dir/all
 
 # Build rule for subdir invocation for target.
@@ -343,7 +343,7 @@ core/CMakeFiles/igl.dir/all: core/CMakeFiles/igl_autogen.dir/all
 
 # Build rule for subdir invocation for target.
 core/CMakeFiles/igl.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/lemoontear/github/RealSkel/build/CMakeFiles 67
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/lemoontear/github/RealSkel/build/CMakeFiles 66
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 core/CMakeFiles/igl.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/lemoontear/github/RealSkel/build/CMakeFiles 0
 .PHONY : core/CMakeFiles/igl.dir/rule
@@ -1093,7 +1093,7 @@ core/CMakeFiles/igl_cgal.dir/all: core/CMakeFiles/igl.dir/all
 core/CMakeFiles/igl_cgal.dir/all: core/CMakeFiles/igl_cgal_autogen.dir/all
 	$(MAKE) $(MAKESILENT) -f core/CMakeFiles/igl_cgal.dir/build.make core/CMakeFiles/igl_cgal.dir/depend
 	$(MAKE) $(MAKESILENT) -f core/CMakeFiles/igl_cgal.dir/build.make core/CMakeFiles/igl_cgal.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/lemoontear/github/RealSkel/build/CMakeFiles --progress-num=71,72,73,74,75,76,77,78,79,80,81 "Built target igl_cgal"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/lemoontear/github/RealSkel/build/CMakeFiles --progress-num=70,71,72,73,74,75,76,77,78,79,80,81 "Built target igl_cgal"
 .PHONY : core/CMakeFiles/igl_cgal.dir/all
 
 # Build rule for subdir invocation for target.
@@ -1126,7 +1126,7 @@ core/CMakeFiles/igl_opengl.dir/all: core/CMakeFiles/igl_opengl_autogen.dir/all
 
 # Build rule for subdir invocation for target.
 core/CMakeFiles/igl_opengl.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/lemoontear/github/RealSkel/build/CMakeFiles 70
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/lemoontear/github/RealSkel/build/CMakeFiles 69
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 core/CMakeFiles/igl_opengl.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/lemoontear/github/RealSkel/build/CMakeFiles 0
 .PHONY : core/CMakeFiles/igl_opengl.dir/rule
@@ -1156,7 +1156,7 @@ core/CMakeFiles/igl_opengl_glfw.dir/all: core/CMakeFiles/igl_opengl_glfw_autogen
 
 # Build rule for subdir invocation for target.
 core/CMakeFiles/igl_opengl_glfw.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/lemoontear/github/RealSkel/build/CMakeFiles 74
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/lemoontear/github/RealSkel/build/CMakeFiles 73
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 core/CMakeFiles/igl_opengl_glfw.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/lemoontear/github/RealSkel/build/CMakeFiles 0
 .PHONY : core/CMakeFiles/igl_opengl_glfw.dir/rule
@@ -1189,7 +1189,7 @@ core/CMakeFiles/igl_opengl_glfw_imgui.dir/all: core/CMakeFiles/igl_opengl_glfw_i
 
 # Build rule for subdir invocation for target.
 core/CMakeFiles/igl_opengl_glfw_imgui.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/lemoontear/github/RealSkel/build/CMakeFiles 77
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/lemoontear/github/RealSkel/build/CMakeFiles 76
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 core/CMakeFiles/igl_opengl_glfw_imgui.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/lemoontear/github/RealSkel/build/CMakeFiles 0
 .PHONY : core/CMakeFiles/igl_opengl_glfw_imgui.dir/rule
@@ -1246,7 +1246,7 @@ core/CMakeFiles/igl_tetgen.dir/all: core/CMakeFiles/igl_tetgen_autogen.dir/all
 
 # Build rule for subdir invocation for target.
 core/CMakeFiles/igl_tetgen.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/lemoontear/github/RealSkel/build/CMakeFiles 69
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/lemoontear/github/RealSkel/build/CMakeFiles 68
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 core/CMakeFiles/igl_tetgen.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/lemoontear/github/RealSkel/build/CMakeFiles 0
 .PHONY : core/CMakeFiles/igl_tetgen.dir/rule
@@ -1274,7 +1274,7 @@ core/CMakeFiles/igl_triangle.dir/all: core/CMakeFiles/igl_triangle_autogen.dir/a
 
 # Build rule for subdir invocation for target.
 core/CMakeFiles/igl_triangle.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/lemoontear/github/RealSkel/build/CMakeFiles 69
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/lemoontear/github/RealSkel/build/CMakeFiles 68
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 core/CMakeFiles/igl_triangle.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/lemoontear/github/RealSkel/build/CMakeFiles 0
 .PHONY : core/CMakeFiles/igl_triangle.dir/rule
@@ -1301,12 +1301,12 @@ core/CMakeFiles/milk.dir/all: core/triangle/CMakeFiles/triangle.dir/all
 core/CMakeFiles/milk.dir/all: core/CMakeFiles/milk_autogen.dir/all
 	$(MAKE) $(MAKESILENT) -f core/CMakeFiles/milk.dir/build.make core/CMakeFiles/milk.dir/depend
 	$(MAKE) $(MAKESILENT) -f core/CMakeFiles/milk.dir/build.make core/CMakeFiles/milk.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/lemoontear/github/RealSkel/build/CMakeFiles --progress-num=95,96,97,98 "Built target milk"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/lemoontear/github/RealSkel/build/CMakeFiles --progress-num=94,95,96,97,98 "Built target milk"
 .PHONY : core/CMakeFiles/milk.dir/all
 
 # Build rule for subdir invocation for target.
 core/CMakeFiles/milk.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/lemoontear/github/RealSkel/build/CMakeFiles 86
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/lemoontear/github/RealSkel/build/CMakeFiles 87
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 core/CMakeFiles/milk.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/lemoontear/github/RealSkel/build/CMakeFiles 0
 .PHONY : core/CMakeFiles/milk.dir/rule
@@ -1327,12 +1327,12 @@ core/CMakeFiles/milk.dir/clean:
 core/CMakeFiles/igl_autogen.dir/all:
 	$(MAKE) $(MAKESILENT) -f core/CMakeFiles/igl_autogen.dir/build.make core/CMakeFiles/igl_autogen.dir/depend
 	$(MAKE) $(MAKESILENT) -f core/CMakeFiles/igl_autogen.dir/build.make core/CMakeFiles/igl_autogen.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/lemoontear/github/RealSkel/build/CMakeFiles --progress-num=70 "Built target igl_autogen"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/lemoontear/github/RealSkel/build/CMakeFiles --progress-num= "Built target igl_autogen"
 .PHONY : core/CMakeFiles/igl_autogen.dir/all
 
 # Build rule for subdir invocation for target.
 core/CMakeFiles/igl_autogen.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/lemoontear/github/RealSkel/build/CMakeFiles 1
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/lemoontear/github/RealSkel/build/CMakeFiles 0
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 core/CMakeFiles/igl_autogen.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/lemoontear/github/RealSkel/build/CMakeFiles 0
 .PHONY : core/CMakeFiles/igl_autogen.dir/rule
@@ -1358,7 +1358,7 @@ core/CMakeFiles/igl_cgal_autogen.dir/all: core/CMakeFiles/igl.dir/all
 
 # Build rule for subdir invocation for target.
 core/CMakeFiles/igl_cgal_autogen.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/lemoontear/github/RealSkel/build/CMakeFiles 67
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/lemoontear/github/RealSkel/build/CMakeFiles 66
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 core/CMakeFiles/igl_cgal_autogen.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/lemoontear/github/RealSkel/build/CMakeFiles 0
 .PHONY : core/CMakeFiles/igl_cgal_autogen.dir/rule
@@ -1385,7 +1385,7 @@ core/CMakeFiles/igl_opengl_autogen.dir/all: core/glad/CMakeFiles/glad.dir/all
 
 # Build rule for subdir invocation for target.
 core/CMakeFiles/igl_opengl_autogen.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/lemoontear/github/RealSkel/build/CMakeFiles 67
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/lemoontear/github/RealSkel/build/CMakeFiles 66
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 core/CMakeFiles/igl_opengl_autogen.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/lemoontear/github/RealSkel/build/CMakeFiles 0
 .PHONY : core/CMakeFiles/igl_opengl_autogen.dir/rule
@@ -1413,7 +1413,7 @@ core/CMakeFiles/igl_opengl_glfw_autogen.dir/all: core/glfw/src/CMakeFiles/glfw.d
 
 # Build rule for subdir invocation for target.
 core/CMakeFiles/igl_opengl_glfw_autogen.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/lemoontear/github/RealSkel/build/CMakeFiles 73
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/lemoontear/github/RealSkel/build/CMakeFiles 72
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 core/CMakeFiles/igl_opengl_glfw_autogen.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/lemoontear/github/RealSkel/build/CMakeFiles 0
 .PHONY : core/CMakeFiles/igl_opengl_glfw_autogen.dir/rule
@@ -1442,7 +1442,7 @@ core/CMakeFiles/igl_opengl_glfw_imgui_autogen.dir/all: core/imgui/CMakeFiles/img
 
 # Build rule for subdir invocation for target.
 core/CMakeFiles/igl_opengl_glfw_imgui_autogen.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/lemoontear/github/RealSkel/build/CMakeFiles 76
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/lemoontear/github/RealSkel/build/CMakeFiles 75
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 core/CMakeFiles/igl_opengl_glfw_imgui_autogen.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/lemoontear/github/RealSkel/build/CMakeFiles 0
 .PHONY : core/CMakeFiles/igl_opengl_glfw_imgui_autogen.dir/rule
@@ -1495,7 +1495,7 @@ core/CMakeFiles/igl_tetgen_autogen.dir/all: core/tetgen/CMakeFiles/tetgen.dir/al
 
 # Build rule for subdir invocation for target.
 core/CMakeFiles/igl_tetgen_autogen.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/lemoontear/github/RealSkel/build/CMakeFiles 68
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/lemoontear/github/RealSkel/build/CMakeFiles 67
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 core/CMakeFiles/igl_tetgen_autogen.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/lemoontear/github/RealSkel/build/CMakeFiles 0
 .PHONY : core/CMakeFiles/igl_tetgen_autogen.dir/rule
@@ -1522,7 +1522,7 @@ core/CMakeFiles/igl_triangle_autogen.dir/all: core/triangle/CMakeFiles/triangle.
 
 # Build rule for subdir invocation for target.
 core/CMakeFiles/igl_triangle_autogen.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/lemoontear/github/RealSkel/build/CMakeFiles 68
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/lemoontear/github/RealSkel/build/CMakeFiles 67
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 core/CMakeFiles/igl_triangle_autogen.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/lemoontear/github/RealSkel/build/CMakeFiles 0
 .PHONY : core/CMakeFiles/igl_triangle_autogen.dir/rule
@@ -1678,7 +1678,7 @@ core/imgui/CMakeFiles/imgui.dir/all: core/glfw/src/CMakeFiles/glfw.dir/all
 core/imgui/CMakeFiles/imgui.dir/all: core/imgui/CMakeFiles/imgui_autogen.dir/all
 	$(MAKE) $(MAKESILENT) -f core/imgui/CMakeFiles/imgui.dir/build.make core/imgui/CMakeFiles/imgui.dir/depend
 	$(MAKE) $(MAKESILENT) -f core/imgui/CMakeFiles/imgui.dir/build.make core/imgui/CMakeFiles/imgui.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/lemoontear/github/RealSkel/build/CMakeFiles --progress-num=89,90 "Built target imgui"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/lemoontear/github/RealSkel/build/CMakeFiles --progress-num=89 "Built target imgui"
 .PHONY : core/imgui/CMakeFiles/imgui.dir/all
 
 # Build rule for subdir invocation for target.
@@ -1705,12 +1705,12 @@ core/imgui/CMakeFiles/imgui_autogen.dir/all: core/glad/CMakeFiles/glad.dir/all
 core/imgui/CMakeFiles/imgui_autogen.dir/all: core/glfw/src/CMakeFiles/glfw.dir/all
 	$(MAKE) $(MAKESILENT) -f core/imgui/CMakeFiles/imgui_autogen.dir/build.make core/imgui/CMakeFiles/imgui_autogen.dir/depend
 	$(MAKE) $(MAKESILENT) -f core/imgui/CMakeFiles/imgui_autogen.dir/build.make core/imgui/CMakeFiles/imgui_autogen.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/lemoontear/github/RealSkel/build/CMakeFiles --progress-num= "Built target imgui_autogen"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/lemoontear/github/RealSkel/build/CMakeFiles --progress-num=90 "Built target imgui_autogen"
 .PHONY : core/imgui/CMakeFiles/imgui_autogen.dir/all
 
 # Build rule for subdir invocation for target.
 core/imgui/CMakeFiles/imgui_autogen.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/lemoontear/github/RealSkel/build/CMakeFiles 3
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/lemoontear/github/RealSkel/build/CMakeFiles 4
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 core/imgui/CMakeFiles/imgui_autogen.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/lemoontear/github/RealSkel/build/CMakeFiles 0
 .PHONY : core/imgui/CMakeFiles/imgui_autogen.dir/rule

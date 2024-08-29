@@ -153,10 +153,24 @@ core/CMakeFiles/milk.dir/ContourExtractor.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/milk.dir/ContourExtractor.cpp.s"
 	cd /home/lemoontear/github/RealSkel/build/core && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/lemoontear/github/RealSkel/core/ContourExtractor.cpp -o CMakeFiles/milk.dir/ContourExtractor.cpp.s
 
+core/CMakeFiles/milk.dir/MassSpringSystem.cpp.o: core/CMakeFiles/milk.dir/flags.make
+core/CMakeFiles/milk.dir/MassSpringSystem.cpp.o: ../core/MassSpringSystem.cpp
+core/CMakeFiles/milk.dir/MassSpringSystem.cpp.o: core/CMakeFiles/milk.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/lemoontear/github/RealSkel/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object core/CMakeFiles/milk.dir/MassSpringSystem.cpp.o"
+	cd /home/lemoontear/github/RealSkel/build/core && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT core/CMakeFiles/milk.dir/MassSpringSystem.cpp.o -MF CMakeFiles/milk.dir/MassSpringSystem.cpp.o.d -o CMakeFiles/milk.dir/MassSpringSystem.cpp.o -c /home/lemoontear/github/RealSkel/core/MassSpringSystem.cpp
+
+core/CMakeFiles/milk.dir/MassSpringSystem.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/milk.dir/MassSpringSystem.cpp.i"
+	cd /home/lemoontear/github/RealSkel/build/core && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/lemoontear/github/RealSkel/core/MassSpringSystem.cpp > CMakeFiles/milk.dir/MassSpringSystem.cpp.i
+
+core/CMakeFiles/milk.dir/MassSpringSystem.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/milk.dir/MassSpringSystem.cpp.s"
+	cd /home/lemoontear/github/RealSkel/build/core && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/lemoontear/github/RealSkel/core/MassSpringSystem.cpp -o CMakeFiles/milk.dir/MassSpringSystem.cpp.s
+
 core/CMakeFiles/milk.dir/MeshDecomposer.cpp.o: core/CMakeFiles/milk.dir/flags.make
 core/CMakeFiles/milk.dir/MeshDecomposer.cpp.o: ../core/MeshDecomposer.cpp
 core/CMakeFiles/milk.dir/MeshDecomposer.cpp.o: core/CMakeFiles/milk.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/lemoontear/github/RealSkel/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object core/CMakeFiles/milk.dir/MeshDecomposer.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/lemoontear/github/RealSkel/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object core/CMakeFiles/milk.dir/MeshDecomposer.cpp.o"
 	cd /home/lemoontear/github/RealSkel/build/core && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT core/CMakeFiles/milk.dir/MeshDecomposer.cpp.o -MF CMakeFiles/milk.dir/MeshDecomposer.cpp.o.d -o CMakeFiles/milk.dir/MeshDecomposer.cpp.o -c /home/lemoontear/github/RealSkel/core/MeshDecomposer.cpp
 
 core/CMakeFiles/milk.dir/MeshDecomposer.cpp.i: cmake_force
@@ -170,7 +184,7 @@ core/CMakeFiles/milk.dir/MeshDecomposer.cpp.s: cmake_force
 core/CMakeFiles/milk.dir/PixelImage.cpp.o: core/CMakeFiles/milk.dir/flags.make
 core/CMakeFiles/milk.dir/PixelImage.cpp.o: ../core/PixelImage.cpp
 core/CMakeFiles/milk.dir/PixelImage.cpp.o: core/CMakeFiles/milk.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/lemoontear/github/RealSkel/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object core/CMakeFiles/milk.dir/PixelImage.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/lemoontear/github/RealSkel/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Building CXX object core/CMakeFiles/milk.dir/PixelImage.cpp.o"
 	cd /home/lemoontear/github/RealSkel/build/core && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT core/CMakeFiles/milk.dir/PixelImage.cpp.o -MF CMakeFiles/milk.dir/PixelImage.cpp.o.d -o CMakeFiles/milk.dir/PixelImage.cpp.o -c /home/lemoontear/github/RealSkel/core/PixelImage.cpp
 
 core/CMakeFiles/milk.dir/PixelImage.cpp.i: cmake_force
@@ -184,7 +198,7 @@ core/CMakeFiles/milk.dir/PixelImage.cpp.s: cmake_force
 core/CMakeFiles/milk.dir/SymmetrySketch.cpp.o: core/CMakeFiles/milk.dir/flags.make
 core/CMakeFiles/milk.dir/SymmetrySketch.cpp.o: ../core/SymmetrySketch.cpp
 core/CMakeFiles/milk.dir/SymmetrySketch.cpp.o: core/CMakeFiles/milk.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/lemoontear/github/RealSkel/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Building CXX object core/CMakeFiles/milk.dir/SymmetrySketch.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/lemoontear/github/RealSkel/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Building CXX object core/CMakeFiles/milk.dir/SymmetrySketch.cpp.o"
 	cd /home/lemoontear/github/RealSkel/build/core && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT core/CMakeFiles/milk.dir/SymmetrySketch.cpp.o -MF CMakeFiles/milk.dir/SymmetrySketch.cpp.o.d -o CMakeFiles/milk.dir/SymmetrySketch.cpp.o -c /home/lemoontear/github/RealSkel/core/SymmetrySketch.cpp
 
 core/CMakeFiles/milk.dir/SymmetrySketch.cpp.i: cmake_force
@@ -198,7 +212,7 @@ core/CMakeFiles/milk.dir/SymmetrySketch.cpp.s: cmake_force
 core/CMakeFiles/milk.dir/TMesh.cpp.o: core/CMakeFiles/milk.dir/flags.make
 core/CMakeFiles/milk.dir/TMesh.cpp.o: ../core/TMesh.cpp
 core/CMakeFiles/milk.dir/TMesh.cpp.o: core/CMakeFiles/milk.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/lemoontear/github/RealSkel/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Building CXX object core/CMakeFiles/milk.dir/TMesh.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/lemoontear/github/RealSkel/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_11) "Building CXX object core/CMakeFiles/milk.dir/TMesh.cpp.o"
 	cd /home/lemoontear/github/RealSkel/build/core && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT core/CMakeFiles/milk.dir/TMesh.cpp.o -MF CMakeFiles/milk.dir/TMesh.cpp.o.d -o CMakeFiles/milk.dir/TMesh.cpp.o -c /home/lemoontear/github/RealSkel/core/TMesh.cpp
 
 core/CMakeFiles/milk.dir/TMesh.cpp.i: cmake_force
@@ -212,7 +226,7 @@ core/CMakeFiles/milk.dir/TMesh.cpp.s: cmake_force
 core/CMakeFiles/milk.dir/TexPaint.cpp.o: core/CMakeFiles/milk.dir/flags.make
 core/CMakeFiles/milk.dir/TexPaint.cpp.o: ../core/TexPaint.cpp
 core/CMakeFiles/milk.dir/TexPaint.cpp.o: core/CMakeFiles/milk.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/lemoontear/github/RealSkel/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_11) "Building CXX object core/CMakeFiles/milk.dir/TexPaint.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/lemoontear/github/RealSkel/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_12) "Building CXX object core/CMakeFiles/milk.dir/TexPaint.cpp.o"
 	cd /home/lemoontear/github/RealSkel/build/core && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT core/CMakeFiles/milk.dir/TexPaint.cpp.o -MF CMakeFiles/milk.dir/TexPaint.cpp.o.d -o CMakeFiles/milk.dir/TexPaint.cpp.o -c /home/lemoontear/github/RealSkel/core/TexPaint.cpp
 
 core/CMakeFiles/milk.dir/TexPaint.cpp.i: cmake_force
@@ -226,7 +240,7 @@ core/CMakeFiles/milk.dir/TexPaint.cpp.s: cmake_force
 core/CMakeFiles/milk.dir/Texture.cpp.o: core/CMakeFiles/milk.dir/flags.make
 core/CMakeFiles/milk.dir/Texture.cpp.o: ../core/Texture.cpp
 core/CMakeFiles/milk.dir/Texture.cpp.o: core/CMakeFiles/milk.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/lemoontear/github/RealSkel/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_12) "Building CXX object core/CMakeFiles/milk.dir/Texture.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/lemoontear/github/RealSkel/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_13) "Building CXX object core/CMakeFiles/milk.dir/Texture.cpp.o"
 	cd /home/lemoontear/github/RealSkel/build/core && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT core/CMakeFiles/milk.dir/Texture.cpp.o -MF CMakeFiles/milk.dir/Texture.cpp.o.d -o CMakeFiles/milk.dir/Texture.cpp.o -c /home/lemoontear/github/RealSkel/core/Texture.cpp
 
 core/CMakeFiles/milk.dir/Texture.cpp.i: cmake_force
@@ -240,7 +254,7 @@ core/CMakeFiles/milk.dir/Texture.cpp.s: cmake_force
 core/CMakeFiles/milk.dir/XFunctions.cpp.o: core/CMakeFiles/milk.dir/flags.make
 core/CMakeFiles/milk.dir/XFunctions.cpp.o: ../core/XFunctions.cpp
 core/CMakeFiles/milk.dir/XFunctions.cpp.o: core/CMakeFiles/milk.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/lemoontear/github/RealSkel/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_13) "Building CXX object core/CMakeFiles/milk.dir/XFunctions.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/lemoontear/github/RealSkel/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_14) "Building CXX object core/CMakeFiles/milk.dir/XFunctions.cpp.o"
 	cd /home/lemoontear/github/RealSkel/build/core && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT core/CMakeFiles/milk.dir/XFunctions.cpp.o -MF CMakeFiles/milk.dir/XFunctions.cpp.o.d -o CMakeFiles/milk.dir/XFunctions.cpp.o -c /home/lemoontear/github/RealSkel/core/XFunctions.cpp
 
 core/CMakeFiles/milk.dir/XFunctions.cpp.i: cmake_force
@@ -254,7 +268,7 @@ core/CMakeFiles/milk.dir/XFunctions.cpp.s: cmake_force
 core/CMakeFiles/milk.dir/XSubToy.cpp.o: core/CMakeFiles/milk.dir/flags.make
 core/CMakeFiles/milk.dir/XSubToy.cpp.o: ../core/XSubToy.cpp
 core/CMakeFiles/milk.dir/XSubToy.cpp.o: core/CMakeFiles/milk.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/lemoontear/github/RealSkel/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_14) "Building CXX object core/CMakeFiles/milk.dir/XSubToy.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/lemoontear/github/RealSkel/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_15) "Building CXX object core/CMakeFiles/milk.dir/XSubToy.cpp.o"
 	cd /home/lemoontear/github/RealSkel/build/core && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT core/CMakeFiles/milk.dir/XSubToy.cpp.o -MF CMakeFiles/milk.dir/XSubToy.cpp.o.d -o CMakeFiles/milk.dir/XSubToy.cpp.o -c /home/lemoontear/github/RealSkel/core/XSubToy.cpp
 
 core/CMakeFiles/milk.dir/XSubToy.cpp.i: cmake_force
@@ -268,7 +282,7 @@ core/CMakeFiles/milk.dir/XSubToy.cpp.s: cmake_force
 core/CMakeFiles/milk.dir/XToy.cpp.o: core/CMakeFiles/milk.dir/flags.make
 core/CMakeFiles/milk.dir/XToy.cpp.o: ../core/XToy.cpp
 core/CMakeFiles/milk.dir/XToy.cpp.o: core/CMakeFiles/milk.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/lemoontear/github/RealSkel/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_15) "Building CXX object core/CMakeFiles/milk.dir/XToy.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/lemoontear/github/RealSkel/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_16) "Building CXX object core/CMakeFiles/milk.dir/XToy.cpp.o"
 	cd /home/lemoontear/github/RealSkel/build/core && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT core/CMakeFiles/milk.dir/XToy.cpp.o -MF CMakeFiles/milk.dir/XToy.cpp.o.d -o CMakeFiles/milk.dir/XToy.cpp.o -c /home/lemoontear/github/RealSkel/core/XToy.cpp
 
 core/CMakeFiles/milk.dir/XToy.cpp.i: cmake_force
@@ -282,7 +296,7 @@ core/CMakeFiles/milk.dir/XToy.cpp.s: cmake_force
 core/CMakeFiles/milk.dir/auto_skel.cpp.o: core/CMakeFiles/milk.dir/flags.make
 core/CMakeFiles/milk.dir/auto_skel.cpp.o: ../core/auto_skel.cpp
 core/CMakeFiles/milk.dir/auto_skel.cpp.o: core/CMakeFiles/milk.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/lemoontear/github/RealSkel/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_16) "Building CXX object core/CMakeFiles/milk.dir/auto_skel.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/lemoontear/github/RealSkel/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_17) "Building CXX object core/CMakeFiles/milk.dir/auto_skel.cpp.o"
 	cd /home/lemoontear/github/RealSkel/build/core && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT core/CMakeFiles/milk.dir/auto_skel.cpp.o -MF CMakeFiles/milk.dir/auto_skel.cpp.o.d -o CMakeFiles/milk.dir/auto_skel.cpp.o -c /home/lemoontear/github/RealSkel/core/auto_skel.cpp
 
 core/CMakeFiles/milk.dir/auto_skel.cpp.i: cmake_force
@@ -296,7 +310,7 @@ core/CMakeFiles/milk.dir/auto_skel.cpp.s: cmake_force
 core/CMakeFiles/milk.dir/cdt_skel.cpp.o: core/CMakeFiles/milk.dir/flags.make
 core/CMakeFiles/milk.dir/cdt_skel.cpp.o: ../core/cdt_skel.cpp
 core/CMakeFiles/milk.dir/cdt_skel.cpp.o: core/CMakeFiles/milk.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/lemoontear/github/RealSkel/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_17) "Building CXX object core/CMakeFiles/milk.dir/cdt_skel.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/lemoontear/github/RealSkel/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_18) "Building CXX object core/CMakeFiles/milk.dir/cdt_skel.cpp.o"
 	cd /home/lemoontear/github/RealSkel/build/core && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT core/CMakeFiles/milk.dir/cdt_skel.cpp.o -MF CMakeFiles/milk.dir/cdt_skel.cpp.o.d -o CMakeFiles/milk.dir/cdt_skel.cpp.o -c /home/lemoontear/github/RealSkel/core/cdt_skel.cpp
 
 core/CMakeFiles/milk.dir/cdt_skel.cpp.i: cmake_force
@@ -310,7 +324,7 @@ core/CMakeFiles/milk.dir/cdt_skel.cpp.s: cmake_force
 core/CMakeFiles/milk.dir/cgal_adapter.cpp.o: core/CMakeFiles/milk.dir/flags.make
 core/CMakeFiles/milk.dir/cgal_adapter.cpp.o: ../core/cgal_adapter.cpp
 core/CMakeFiles/milk.dir/cgal_adapter.cpp.o: core/CMakeFiles/milk.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/lemoontear/github/RealSkel/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_18) "Building CXX object core/CMakeFiles/milk.dir/cgal_adapter.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/lemoontear/github/RealSkel/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_19) "Building CXX object core/CMakeFiles/milk.dir/cgal_adapter.cpp.o"
 	cd /home/lemoontear/github/RealSkel/build/core && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT core/CMakeFiles/milk.dir/cgal_adapter.cpp.o -MF CMakeFiles/milk.dir/cgal_adapter.cpp.o.d -o CMakeFiles/milk.dir/cgal_adapter.cpp.o -c /home/lemoontear/github/RealSkel/core/cgal_adapter.cpp
 
 core/CMakeFiles/milk.dir/cgal_adapter.cpp.i: cmake_force
@@ -324,7 +338,7 @@ core/CMakeFiles/milk.dir/cgal_adapter.cpp.s: cmake_force
 core/CMakeFiles/milk.dir/common.cpp.o: core/CMakeFiles/milk.dir/flags.make
 core/CMakeFiles/milk.dir/common.cpp.o: ../core/common.cpp
 core/CMakeFiles/milk.dir/common.cpp.o: core/CMakeFiles/milk.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/lemoontear/github/RealSkel/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_19) "Building CXX object core/CMakeFiles/milk.dir/common.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/lemoontear/github/RealSkel/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_20) "Building CXX object core/CMakeFiles/milk.dir/common.cpp.o"
 	cd /home/lemoontear/github/RealSkel/build/core && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT core/CMakeFiles/milk.dir/common.cpp.o -MF CMakeFiles/milk.dir/common.cpp.o.d -o CMakeFiles/milk.dir/common.cpp.o -c /home/lemoontear/github/RealSkel/core/common.cpp
 
 core/CMakeFiles/milk.dir/common.cpp.i: cmake_force
@@ -338,7 +352,7 @@ core/CMakeFiles/milk.dir/common.cpp.s: cmake_force
 core/CMakeFiles/milk.dir/cylinder_skel.cpp.o: core/CMakeFiles/milk.dir/flags.make
 core/CMakeFiles/milk.dir/cylinder_skel.cpp.o: ../core/cylinder_skel.cpp
 core/CMakeFiles/milk.dir/cylinder_skel.cpp.o: core/CMakeFiles/milk.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/lemoontear/github/RealSkel/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_20) "Building CXX object core/CMakeFiles/milk.dir/cylinder_skel.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/lemoontear/github/RealSkel/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_21) "Building CXX object core/CMakeFiles/milk.dir/cylinder_skel.cpp.o"
 	cd /home/lemoontear/github/RealSkel/build/core && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT core/CMakeFiles/milk.dir/cylinder_skel.cpp.o -MF CMakeFiles/milk.dir/cylinder_skel.cpp.o.d -o CMakeFiles/milk.dir/cylinder_skel.cpp.o -c /home/lemoontear/github/RealSkel/core/cylinder_skel.cpp
 
 core/CMakeFiles/milk.dir/cylinder_skel.cpp.i: cmake_force
@@ -352,7 +366,7 @@ core/CMakeFiles/milk.dir/cylinder_skel.cpp.s: cmake_force
 core/CMakeFiles/milk.dir/part_generator.cpp.o: core/CMakeFiles/milk.dir/flags.make
 core/CMakeFiles/milk.dir/part_generator.cpp.o: ../core/part_generator.cpp
 core/CMakeFiles/milk.dir/part_generator.cpp.o: core/CMakeFiles/milk.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/lemoontear/github/RealSkel/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_21) "Building CXX object core/CMakeFiles/milk.dir/part_generator.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/lemoontear/github/RealSkel/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_22) "Building CXX object core/CMakeFiles/milk.dir/part_generator.cpp.o"
 	cd /home/lemoontear/github/RealSkel/build/core && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT core/CMakeFiles/milk.dir/part_generator.cpp.o -MF CMakeFiles/milk.dir/part_generator.cpp.o.d -o CMakeFiles/milk.dir/part_generator.cpp.o -c /home/lemoontear/github/RealSkel/core/part_generator.cpp
 
 core/CMakeFiles/milk.dir/part_generator.cpp.i: cmake_force
@@ -366,7 +380,7 @@ core/CMakeFiles/milk.dir/part_generator.cpp.s: cmake_force
 core/CMakeFiles/milk.dir/polygon_partition.cpp.o: core/CMakeFiles/milk.dir/flags.make
 core/CMakeFiles/milk.dir/polygon_partition.cpp.o: ../core/polygon_partition.cpp
 core/CMakeFiles/milk.dir/polygon_partition.cpp.o: core/CMakeFiles/milk.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/lemoontear/github/RealSkel/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_22) "Building CXX object core/CMakeFiles/milk.dir/polygon_partition.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/lemoontear/github/RealSkel/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_23) "Building CXX object core/CMakeFiles/milk.dir/polygon_partition.cpp.o"
 	cd /home/lemoontear/github/RealSkel/build/core && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT core/CMakeFiles/milk.dir/polygon_partition.cpp.o -MF CMakeFiles/milk.dir/polygon_partition.cpp.o.d -o CMakeFiles/milk.dir/polygon_partition.cpp.o -c /home/lemoontear/github/RealSkel/core/polygon_partition.cpp
 
 core/CMakeFiles/milk.dir/polygon_partition.cpp.i: cmake_force
@@ -380,7 +394,7 @@ core/CMakeFiles/milk.dir/polygon_partition.cpp.s: cmake_force
 core/CMakeFiles/milk.dir/silhoutte_draw.cpp.o: core/CMakeFiles/milk.dir/flags.make
 core/CMakeFiles/milk.dir/silhoutte_draw.cpp.o: ../core/silhoutte_draw.cpp
 core/CMakeFiles/milk.dir/silhoutte_draw.cpp.o: core/CMakeFiles/milk.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/lemoontear/github/RealSkel/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_23) "Building CXX object core/CMakeFiles/milk.dir/silhoutte_draw.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/lemoontear/github/RealSkel/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_24) "Building CXX object core/CMakeFiles/milk.dir/silhoutte_draw.cpp.o"
 	cd /home/lemoontear/github/RealSkel/build/core && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT core/CMakeFiles/milk.dir/silhoutte_draw.cpp.o -MF CMakeFiles/milk.dir/silhoutte_draw.cpp.o.d -o CMakeFiles/milk.dir/silhoutte_draw.cpp.o -c /home/lemoontear/github/RealSkel/core/silhoutte_draw.cpp
 
 core/CMakeFiles/milk.dir/silhoutte_draw.cpp.i: cmake_force
@@ -394,7 +408,7 @@ core/CMakeFiles/milk.dir/silhoutte_draw.cpp.s: cmake_force
 core/CMakeFiles/milk.dir/skeletor.cpp.o: core/CMakeFiles/milk.dir/flags.make
 core/CMakeFiles/milk.dir/skeletor.cpp.o: ../core/skeletor.cpp
 core/CMakeFiles/milk.dir/skeletor.cpp.o: core/CMakeFiles/milk.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/lemoontear/github/RealSkel/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_24) "Building CXX object core/CMakeFiles/milk.dir/skeletor.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/lemoontear/github/RealSkel/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_25) "Building CXX object core/CMakeFiles/milk.dir/skeletor.cpp.o"
 	cd /home/lemoontear/github/RealSkel/build/core && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT core/CMakeFiles/milk.dir/skeletor.cpp.o -MF CMakeFiles/milk.dir/skeletor.cpp.o.d -o CMakeFiles/milk.dir/skeletor.cpp.o -c /home/lemoontear/github/RealSkel/core/skeletor.cpp
 
 core/CMakeFiles/milk.dir/skeletor.cpp.i: cmake_force
@@ -408,7 +422,7 @@ core/CMakeFiles/milk.dir/skeletor.cpp.s: cmake_force
 core/CMakeFiles/milk.dir/slice_polygon.cpp.o: core/CMakeFiles/milk.dir/flags.make
 core/CMakeFiles/milk.dir/slice_polygon.cpp.o: ../core/slice_polygon.cpp
 core/CMakeFiles/milk.dir/slice_polygon.cpp.o: core/CMakeFiles/milk.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/lemoontear/github/RealSkel/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_25) "Building CXX object core/CMakeFiles/milk.dir/slice_polygon.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/lemoontear/github/RealSkel/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_26) "Building CXX object core/CMakeFiles/milk.dir/slice_polygon.cpp.o"
 	cd /home/lemoontear/github/RealSkel/build/core && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT core/CMakeFiles/milk.dir/slice_polygon.cpp.o -MF CMakeFiles/milk.dir/slice_polygon.cpp.o.d -o CMakeFiles/milk.dir/slice_polygon.cpp.o -c /home/lemoontear/github/RealSkel/core/slice_polygon.cpp
 
 core/CMakeFiles/milk.dir/slice_polygon.cpp.i: cmake_force
@@ -422,7 +436,7 @@ core/CMakeFiles/milk.dir/slice_polygon.cpp.s: cmake_force
 core/CMakeFiles/milk.dir/sskel_draw.cpp.o: core/CMakeFiles/milk.dir/flags.make
 core/CMakeFiles/milk.dir/sskel_draw.cpp.o: ../core/sskel_draw.cpp
 core/CMakeFiles/milk.dir/sskel_draw.cpp.o: core/CMakeFiles/milk.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/lemoontear/github/RealSkel/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_26) "Building CXX object core/CMakeFiles/milk.dir/sskel_draw.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/lemoontear/github/RealSkel/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_27) "Building CXX object core/CMakeFiles/milk.dir/sskel_draw.cpp.o"
 	cd /home/lemoontear/github/RealSkel/build/core && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT core/CMakeFiles/milk.dir/sskel_draw.cpp.o -MF CMakeFiles/milk.dir/sskel_draw.cpp.o.d -o CMakeFiles/milk.dir/sskel_draw.cpp.o -c /home/lemoontear/github/RealSkel/core/sskel_draw.cpp
 
 core/CMakeFiles/milk.dir/sskel_draw.cpp.i: cmake_force
@@ -441,6 +455,7 @@ milk_OBJECTS = \
 "CMakeFiles/milk.dir/CSketchManager.cpp.o" \
 "CMakeFiles/milk.dir/CSpline.cpp.o" \
 "CMakeFiles/milk.dir/ContourExtractor.cpp.o" \
+"CMakeFiles/milk.dir/MassSpringSystem.cpp.o" \
 "CMakeFiles/milk.dir/MeshDecomposer.cpp.o" \
 "CMakeFiles/milk.dir/PixelImage.cpp.o" \
 "CMakeFiles/milk.dir/SymmetrySketch.cpp.o" \
@@ -471,6 +486,7 @@ core/libmilk.a: core/CMakeFiles/milk.dir/BoneBoneCopyMap.cpp.o
 core/libmilk.a: core/CMakeFiles/milk.dir/CSketchManager.cpp.o
 core/libmilk.a: core/CMakeFiles/milk.dir/CSpline.cpp.o
 core/libmilk.a: core/CMakeFiles/milk.dir/ContourExtractor.cpp.o
+core/libmilk.a: core/CMakeFiles/milk.dir/MassSpringSystem.cpp.o
 core/libmilk.a: core/CMakeFiles/milk.dir/MeshDecomposer.cpp.o
 core/libmilk.a: core/CMakeFiles/milk.dir/PixelImage.cpp.o
 core/libmilk.a: core/CMakeFiles/milk.dir/SymmetrySketch.cpp.o
@@ -493,7 +509,7 @@ core/libmilk.a: core/CMakeFiles/milk.dir/slice_polygon.cpp.o
 core/libmilk.a: core/CMakeFiles/milk.dir/sskel_draw.cpp.o
 core/libmilk.a: core/CMakeFiles/milk.dir/build.make
 core/libmilk.a: core/CMakeFiles/milk.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/lemoontear/github/RealSkel/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_27) "Linking CXX static library libmilk.a"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/lemoontear/github/RealSkel/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_28) "Linking CXX static library libmilk.a"
 	cd /home/lemoontear/github/RealSkel/build/core && $(CMAKE_COMMAND) -P CMakeFiles/milk.dir/cmake_clean_target.cmake
 	cd /home/lemoontear/github/RealSkel/build/core && $(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/milk.dir/link.txt --verbose=$(VERBOSE)
 

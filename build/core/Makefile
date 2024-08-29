@@ -880,6 +880,30 @@ ContourExtractor.cpp.s:
 	cd /home/lemoontear/github/RealSkel/build && $(MAKE) $(MAKESILENT) -f core/CMakeFiles/milk.dir/build.make core/CMakeFiles/milk.dir/ContourExtractor.cpp.s
 .PHONY : ContourExtractor.cpp.s
 
+MassSpringSystem.o: MassSpringSystem.cpp.o
+.PHONY : MassSpringSystem.o
+
+# target to build an object file
+MassSpringSystem.cpp.o:
+	cd /home/lemoontear/github/RealSkel/build && $(MAKE) $(MAKESILENT) -f core/CMakeFiles/milk.dir/build.make core/CMakeFiles/milk.dir/MassSpringSystem.cpp.o
+.PHONY : MassSpringSystem.cpp.o
+
+MassSpringSystem.i: MassSpringSystem.cpp.i
+.PHONY : MassSpringSystem.i
+
+# target to preprocess a source file
+MassSpringSystem.cpp.i:
+	cd /home/lemoontear/github/RealSkel/build && $(MAKE) $(MAKESILENT) -f core/CMakeFiles/milk.dir/build.make core/CMakeFiles/milk.dir/MassSpringSystem.cpp.i
+.PHONY : MassSpringSystem.cpp.i
+
+MassSpringSystem.s: MassSpringSystem.cpp.s
+.PHONY : MassSpringSystem.s
+
+# target to generate assembly for a file
+MassSpringSystem.cpp.s:
+	cd /home/lemoontear/github/RealSkel/build && $(MAKE) $(MAKESILENT) -f core/CMakeFiles/milk.dir/build.make core/CMakeFiles/milk.dir/MassSpringSystem.cpp.s
+.PHONY : MassSpringSystem.cpp.s
+
 MeshDecomposer.o: MeshDecomposer.cpp.o
 .PHONY : MeshDecomposer.o
 
@@ -14005,6 +14029,9 @@ help:
 	@echo "... ContourExtractor.o"
 	@echo "... ContourExtractor.i"
 	@echo "... ContourExtractor.s"
+	@echo "... MassSpringSystem.o"
+	@echo "... MassSpringSystem.i"
+	@echo "... MassSpringSystem.s"
 	@echo "... MeshDecomposer.o"
 	@echo "... MeshDecomposer.i"
 	@echo "... MeshDecomposer.s"

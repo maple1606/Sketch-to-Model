@@ -12,6 +12,7 @@
 #include "ssnode_with_subtoy_info.h"
 
 // Rig & Animation
+#include "common.h"
 #include "Skeleton.h"
 #include "Bone.h"
 #include "Animation.h"
@@ -98,6 +99,10 @@ public:
     // "horizontally stacked" transformation matrices
     // If a single transformation is a #rows by #cols matrix then T is a
     // #rows by #actual_weights*#cols matrix
+
+    // each element in this vector represent the mass of a specific vertice/face
+    Eigen::VectorXd vert_mass, face_mass;
+
     Eigen::MatrixXd T;
     // "vertically stacked" transformation matrices
     // If a single transformation is a 3 by 4 matrix then T_vertical is a
