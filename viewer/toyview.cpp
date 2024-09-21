@@ -2282,11 +2282,13 @@ void SkelGL::compute_element(EasyGL *gl)
         {
             if (gl->m_opMode == OPMODE_BBW_DEFORM)
             {
-                const Pnt3 &tail = b->tail_as_drawn();
+                // kamehame mark
+                const Pnt3 &tail = b->get_parent()->tip_as_drawn();
                 const Pnt3 &tip = b->tip_as_drawn();
                 tips.push_back(GLVec3(tip.x(), tip.y(), tip.z() + 0.2));
                 lines.push_back(GLVec3(tail.x(), tail.y(), tail.z() + 0.2));
                 lines.push_back(GLVec3(tip.x(), tip.y(), tip.z() + 0.2));
+                
             }
             else
             {
@@ -2365,7 +2367,7 @@ void SkelGL::compute_drag_line(EasyGL *gl, Bone *bone)
 
     QColor guide_color(QColor(Qt::blue));
 
-    QColor drag_color(QColor(Qt::red));
+    QColor drag_color(QColor(Qt::green));
 
     dragline_container[0].setColor(guide_color);
     dragline_container[0].setEdgeWidth(2.0);

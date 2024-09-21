@@ -579,12 +579,6 @@ void EasyGL::mousePressEvent(QMouseEvent *event)
             }
             else if (m_opMode == OPMODE_BBW_DEFORM)
             {
-                currentPos = event->pos();
-                timer.start();
-                isDragging = true;
-
-                qDebug() << "startPos: " << currentPos;
-
                 m_curView->m_toy->skel->set_editing(false);
             }
 
@@ -687,28 +681,6 @@ void EasyGL::mouseMoveEvent(QMouseEvent *event)
             bool right_click = (event->buttons() & Qt::RightButton);
             bool shift_down = (event->modifiers() & Qt::ShiftModifier);
             bool ctrl_down = (event->modifiers() & Qt::ControlModifier);
-
-            if (isDragging) {
-                if (lastPos.isNull()) {
-                    lastPos = currentPos;
-                    lastVelocity = QVector2D(0, 0);
-                    lastAcceleration = QVector2D(0, 0);
-                }
-                
-                currentPos = event->pos();
-                qDebug() << "Mouse moved to:" << currentPos;
-
-                QVector2D currentVelocity = QVector2D(currentPos - lastPos) / deltaTime;
-
-                QVector2D currentAcceleration = (currentVelocity - lastVelocity) / deltaTime;
-
-                qDebug() << "Current Position:" << currentPos;
-                qDebug() << "Velocity:" << currentVelocity;
-                qDebug() << "Acceleration:" << currentAcceleration;
-
-                lastPos = currentPos;
-                lastVelocity = currentVelocity;
-            }
             // qDebug() << __FILE__ << " " << __LINE__ << " dragBone right_click=" << right_click;
             m_curView->dragBone(event->pos(), right_click, shift_down, ctrl_down);
         }
@@ -780,11 +752,8 @@ void EasyGL::mouseReleaseEvent(QMouseEvent *event)
         }
         else if (m_opMode == OPMODE_EDIT_BONE || m_opMode == OPMODE_BBW_DEFORM)
         {
-            if (event->button() == Qt::LeftButton && isDragging) {
-                isDragging = false;
-                cout << "xDDDD\n";
-
-                timer.restart();
+            if (event->button() == Qt::LeftButton) {
+                
             }
             m_curView->releaseBone(this);
         }

@@ -1,4 +1,0 @@
-name:20240829_120300
-num_subToys:1
-curSubToyIdx:0
-parentToyIdx:0

@@ -69,6 +69,11 @@ public:
     bool isAttachBone = false;
     bool isAttachBoneActivated = false;
 
+    mutable Eigen::Vector3d tip_position;   
+    mutable Eigen::Vector3d tail_position;
+    mutable double rest_length;
+    bool is_dragged_once = false;
+
 public:
     // Inputs:
     //   parent_  parent bone {NULL}
@@ -85,6 +90,26 @@ public:
     //   that  other bone
     Bone(const Bone *that);
     ~Bone();
+
+    void setTipCoordinate(const Eigen::Vector3d& new_tip_position) const {
+        tip_position = new_tip_position;
+    }
+
+    void setTailCoordinate(const Eigen::Vector3d& new_tail_position) {
+        tail_position = new_tail_position;
+    }
+
+    Eigen::Vector3d getTipCoordinate() const {
+        return tip_position;
+    }
+
+    Eigen::Vector3d getTailCoordinate() const {
+        return tail_position;
+    }
+
+    double calculateLength() const {
+        return (tip_position - tail_position).norm(); 
+    }
 
     // Sets the weight index of this bone. Results in error if bone is root
     // or weight is less than 0
@@ -189,6 +214,9 @@ public:
     int down_x;
     int down_y;
 
+    double deltaTime = 0.016;
+    static Eigen::Vector3d velocity;
+
     // sx, sy: screen-space coordinate
     bool down(int sx, int sy,
               int width, int height,
@@ -201,6 +229,8 @@ public:
               int width, int height,
               float *viewMatrix, float *mvpMatrix,
               bool right_click, bool shift_down, bool ctrl_down);
+
+    void secondaryMovement(Eigen::Vector3d at);
 
     void tip_color(double pcolor[3]) const;
     void line_segment_color(double lcolor[3]) const;

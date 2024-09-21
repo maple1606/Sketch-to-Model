@@ -153,6 +153,7 @@ Bone::Bone(
         std::vector<Bone *> B = gather_bones(skel->roots);
         set_wi(B.size() - skel->roots.size());
         set_parent(parent_);
+        
         // M_DEBUG << this
         //         << " I am a child, my wi is " << get_wi() << " my parent's wi is " << parent_->get_wi()
         //         << " subtoy_id=" << subtoy_id << endl;
@@ -363,6 +364,7 @@ Eigen::Vector3d Bone::tip_as_drawn() const
     bool average_children_tails =
         skel->average_children_tails_to_draw_non_weighted_roots &&
         is_root() && wi < 0;
+   
     return tip(according_to_last_T, average_children_tails);
 }
 
@@ -586,6 +588,8 @@ void Bone::tip_color(double pcolor[3]) const
     }
 }
 
+Eigen::Vector3d Bone::velocity(0, 0, 0);
+
 bool Bone::drag(int sx, int sy,
                 int width, int height,
                 float *viewMatrix, float *mvpMatrix,
@@ -693,19 +697,45 @@ bool Bone::drag(int sx, int sy,
         }
         else
         {
-            Vector3d old_tip = tip_as_drawn();
-            Vector3d sold_tip;
+            Vector3d old_tip = tip_as_drawn(); // current 3D position of the bone’s tip in world coordinates
+            Vector3d sold_tip; // screen-space representation of the bone’s 3D tip position after projection
+            // 3D world coordinates to 2D screen coordinates
             EGL::project(old_tip.x(), old_tip.y(), old_tip.z(), width, height, mvpMatrix, sold_tip[0], sold_tip[1], sold_tip[2]);
             double sz = sold_tip[2];
             // cout << __FILE__ << " " << __LINE__ << " old_tip=" << old_tip.transpose() << " sold_tip=" << sold_tip.transpose() << endl;
 
             Vector3d new_tip;
+            // 2D screen coordinates back into 3D world coordinates
             EGL::unproject(sx, sy, sz, width, height, mvpMatrix, new_tip[0], new_tip[1], new_tip[2]);
             // cout << __FILE__ << " " << __LINE__ << " sx=" << sx << " sy=" << sy << " sz=" << sz << " width=" << width
             //      << " height=" << height << " mvpMatrix=\n"
             //      << Map<Matrix4f>(mvpMatrix) << endl;
 
-            Vector3d at = new_tip - old_tip;
+            if (!is_root())
+            {
+                Vector3d tail = parent->tip_as_drawn();
+
+                setTipCoordinate(new_tip);
+                setTailCoordinate(tail);
+
+                double current_length = calculateLength();
+                if (!is_dragged_once) 
+                {
+                    rest_length = current_length;
+                    is_dragged_once = true;
+                }
+
+                // cout << initial_length << endl;
+                if (current_length != rest_length)
+                {
+                    Vector3d direction = (new_tip - tail).normalized();
+                    new_tip = tail + direction * initial_length;
+                    
+                    setTipCoordinate(new_tip);
+                }
+            }
+
+            Vector3d at = new_tip - old_tip; // how much the tip should move in 3D world space 
             Vector3d p_at(0, 0, 0);
 
             // cout << __FILE__ << " " << __LINE__ << ": new_tip=" << new_tip.transpose()
@@ -716,7 +746,10 @@ bool Bone::drag(int sx, int sy,
             {
                 p_at = parent->affine().translation();
             }
+
+            // uses inverse to transform to the bone’s local coordinate system
             Vector3d trans_update = orientation().inverse() * at;
+
             if (skel->get_editing())
             {
                 if (is_line_segment_selected)
@@ -749,6 +782,11 @@ bool Bone::drag(int sx, int sy,
     last_x = sx;
     last_y = sy;
     return is_selected;
+}
+
+void Bone::secondaryMovement(Vector3d displacement) 
+{
+    
 }
 
 void Bone::line_segment_color(double lcolor[3]) const
