@@ -930,6 +930,10 @@ void EasyGL::keyPressEvent(QKeyEvent *e)
                 v->isTransparentMode = false;
 
                 v->repaint();
+                MassSpringBuilder *massSpringBuilder = new MassSpringBuilder();
+                const SSkel<SSNodeWithSubToyInfo> cur_sskel = m_curView->m_toy->m_sskel;
+
+                // massSpringBuilder->buildSpringBoneSystem(cur_sskel);                
             }
         }
         else if (e->key() == Qt::Key_G) // Move SubPart

@@ -17,6 +17,7 @@
 #include "toyview.h"
 #include "trackball.h"
 #include "common.h"
+#include "MassSpringSolver.h"
 
 // Display the stored data from different viewpoints
 class EasyGL : public Viewer_interface

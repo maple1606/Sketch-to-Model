@@ -1,6 +1,7 @@
 #pragma once
 #include <vector>
 #include <string>
+
 enum MeshMode
 {
     MESH_MODE_PLAIN,

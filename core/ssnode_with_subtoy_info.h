@@ -1,6 +1,6 @@
 #pragma once
-
-class XSubToy;
+#include "straight_skeleton_types.h"
+#include "XSubToy.h"
 
 struct SSNodeWithSubToyInfo : public SSNode
 {

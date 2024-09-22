@@ -255,6 +255,7 @@ public:
 //   BR  list of bone roots
 // Returns list of bone pointers in what should be considered RANDOM ORDER
 //
+// this is the real gather_bones-mark
 inline std::vector<Bone *> gather_bones(const std::vector<Bone *> &BR)
 {
     std::list<Bone *> Q;

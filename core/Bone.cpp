@@ -729,7 +729,7 @@ bool Bone::drag(int sx, int sy,
                 if (current_length != rest_length)
                 {
                     Vector3d direction = (new_tip - tail).normalized();
-                    new_tip = tail + direction * initial_length;
+                    new_tip = tail + direction * rest_length;
                     
                     setTipCoordinate(new_tip);
                 }
