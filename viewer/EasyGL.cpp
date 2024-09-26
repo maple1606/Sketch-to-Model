@@ -931,9 +931,11 @@ void EasyGL::keyPressEvent(QKeyEvent *e)
 
                 v->repaint();
                 MassSpringBuilder *massSpringBuilder = new MassSpringBuilder();
-                const SSkel<SSNodeWithSubToyInfo> cur_sskel = m_curView->m_toy->m_sskel;
+                SSkel<SSNodeWithSubToyInfo> cur_sskel = m_curView->m_toy->m_sskel;
 
-                // massSpringBuilder->buildSpringBoneSystem(cur_sskel);                
+                massSpringBuilder->buildSpringBoneSystem(cur_sskel);  
+                g_system = massSpringBuilder->getResult();       
+                g_solver = new MassSpringSolver(g_system);       
             }
         }
         else if (e->key() == Qt::Key_G) // Move SubPart

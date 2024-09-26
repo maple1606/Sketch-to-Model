@@ -126,7 +126,7 @@ void MassSpringSolver::timedSolve(unsigned int ms) {
 
 // B U I L D E R ////////////////////////////////////////////////////////////////////////////////////
 void MassSpringBuilder::buildSpringBoneSystem(
-    SSkel<SSNodeWithSubToyInfo> sskel,
+    SSkel<SSNodeWithSubToyInfo> &sskel,
 	float time_step,
 	float rest_length,
 	float stiffness,
@@ -134,9 +134,9 @@ void MassSpringBuilder::buildSpringBoneSystem(
 	float damping_factor,
 	float gravity
 ) {
-    // int num_edges = static_cast<int>(sskel.edges.size());
-    // unsigned int n = num_edges;
-	/**
+    int num_edges = static_cast<int>(sskel.edges.size());
+    unsigned int n = num_edges;
+
 	// shorthand
 	const double root2 = 1.41421356237;
 
@@ -155,13 +155,16 @@ void MassSpringBuilder::buildSpringBoneSystem(
 	VectorXf stiffnesses(n_springs);
 	unsigned int k = 0;
 
-    for (int i = 0; i < num_edges; ++i)
+	// std::cout << "num edge: " << n << std::endl;
+
+    for (int i = 0; i < n; ++i)
     {
-        EdgeT *edge = sskel.edges[i];
-        std::cout << edge->node0->idx << " " << edge->node1->idx;
+		// std::cout << ":(\n";
+        // EdgeT *edge = sskel.edges[i];
+        // std::cout << sskel.edges[i]->node0->idx << " " << sskel.edges[i]->node1->idx << std::endl;
 
         // structural spring
-		spring_list[k] = Edge(edge->node0->idx, edge->node1->idx);
+		spring_list[k] = Edge(sskel.edges[i]->node0->idx, sskel.edges[i]->node1->idx);
 		rest_lengths[k] = rest_length;
 		stiffnesses[k] = stiffness;
 		structI.push_back(k++);
@@ -172,7 +175,6 @@ void MassSpringBuilder::buildSpringBoneSystem(
 
 	result = new mass_spring_system(n_points, n_springs, time_step, spring_list, rest_lengths,
 		stiffnesses, masses, fext, damping_factor);
-		*/
 }
 
 MassSpringBuilder::IndexList MassSpringBuilder::getStructIndex() { return structI; }

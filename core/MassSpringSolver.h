@@ -104,7 +104,7 @@ private:
 
 public:
 	void buildSpringBoneSystem(
-        SSkel<SSNodeWithSubToyInfo> sskel, // skeleton
+        SSkel<SSNodeWithSubToyInfo> &sskel, // skeleton
 		float time_step = SystemParam::time_step,         // time step
 		float rest_length = SystemParam::rest_length,       // spring rest length (non-diagonal)
 		float stiffness = SystemParam::stiffness,         // spring stiffness
