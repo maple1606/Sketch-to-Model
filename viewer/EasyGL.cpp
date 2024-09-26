@@ -731,6 +731,13 @@ void EasyGL::mouseMoveEvent(QMouseEvent *event)
                 m_curView->updateSubMeshDeform(v);
                 m_curView->m_meshGL3D->update(v);
                 m_curView->m_skelGL->update(v);
+
+                g_solver->solve(g_iter);
+	            g_solver->solve(g_iter); 
+
+                // fix points
+                CgSatisfyVisitor visitor;
+                visitor.satisfy(*g_cgRootNode);
             }
             else if (m_opMode == OPMODE_EDIT_BONE)
             {
@@ -944,7 +951,7 @@ void EasyGL::keyPressEvent(QKeyEvent *e)
 
                 v->repaint();
                 
-                
+                // ToDO: change rest_lengths params to each bone's rest length
                 MassSpringBuilder *massSpringBuilder = new MassSpringBuilder();
                 SSkel<SSNodeWithSubToyInfo> cur_sskel = m_curView->m_toy->m_sskel;
 
@@ -955,7 +962,7 @@ void EasyGL::keyPressEvent(QKeyEvent *e)
                 g_system = massSpringBuilder->getResult();       
                 g_solver = new MassSpringSolver(g_system, m_curView->GetVFloatData());      
 
-                const float tauc = 0.4f; // critical spring deformation
+                const float tauc = 0.12f; // critical spring deformation
 	            const unsigned int deformIter = 15; // number of iterations 
 
                 // initialize constraints
@@ -963,11 +970,6 @@ void EasyGL::keyPressEvent(QKeyEvent *e)
                 CgSpringDeformationNode* deformationNode =
                     new CgSpringDeformationNode(g_system, m_curView->GetVFloatData(), tauc, deformIter);
                 deformationNode->addSprings(massSpringBuilder->getStructIndex());
-
-                // fix top corners
-                CgPointFixNode* cornerFixer = new CgPointFixNode(g_system, m_curView->GetVFloatData());
-                cornerFixer->fixPoint(0);
-                cornerFixer->fixPoint(n - 1);
 
                 CgPointFixNode* mouseFixer = new CgPointFixNode(g_system, m_curView->GetVFloatData());
 
@@ -978,15 +980,7 @@ void EasyGL::keyPressEvent(QKeyEvent *e)
                 g_cgRootNode->addChild(deformationNode); 
 
                 // second layer
-                deformationNode->addChild(cornerFixer);
                 deformationNode->addChild(mouseFixer); 
-
-                g_solver->solve(g_iter);
-	            g_solver->solve(g_iter); 
-
-                // fix points
-                CgSatisfyVisitor visitor;
-                visitor.satisfy(*g_cgRootNode);
             }
         }
         else if (e->key() == Qt::Key_G) // Move SubPart

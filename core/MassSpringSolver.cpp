@@ -105,6 +105,7 @@ void MassSpringSolver::localStep() {
 }
 
 void MassSpringSolver::solve(unsigned int n) {
+	std::cout << ":L\n";
 	float a = system->damping_factor; // shorthand
 
 	// update inertial term

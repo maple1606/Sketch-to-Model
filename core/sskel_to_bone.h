@@ -42,7 +42,9 @@ inline void sskel_to_bone(const SSkel<NodeT> &sskel, NodeT *root, Bone *boneRoot
                 if (!isVisit[cNode])
                 {
                     // M_DEBUG << " visit cnode" << cNode->idx << std::endl;
-                    Bone *cBone = new Bone(skel, pBone, cNode->pos - pNode->pos);
+                    Eigen::Vector3d direction = cNode->pos - pNode->pos;
+                    Bone *cBone = new Bone(skel, pBone, direction);
+                    cBone->rest_length = direction.norm();
                     Q.push_back(cNode);
                     QS.push_back(cBone);
                     ++num_b;

@@ -719,11 +719,6 @@ bool Bone::drag(int sx, int sy,
                 setTailCoordinate(tail);
 
                 double current_length = calculateLength();
-                if (!is_dragged_once) 
-                {
-                    rest_length = current_length;
-                    is_dragged_once = true;
-                }
 
                 // cout << initial_length << endl;
                 if (current_length != rest_length)

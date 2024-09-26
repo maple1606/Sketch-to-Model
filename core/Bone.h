@@ -72,7 +72,6 @@ public:
     mutable Eigen::Vector3d tip_position;   
     mutable Eigen::Vector3d tail_position;
     mutable double rest_length;
-    bool is_dragged_once = false;
 
 public:
     // Inputs:
