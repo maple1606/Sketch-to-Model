@@ -185,8 +185,6 @@ public:
     // ----Deform | Animation --------
     OperationMode m_opMode = OperationMode::OPMODE_DRAW;
     bool with_weights = false;
-    static mass_spring_system* g_system;
-    static MassSpringSolver* g_solver;
 
     // --- fps -----------------------
     QTime m_fpsTime;

@@ -417,6 +417,24 @@ void ToyView::extract_part_contour(const std::vector<Pnt3> &outer_contour, EasyG
     cv::imwrite("output/part_poly.jpg", img);
 }
 
+float* ToyView::GetVFloatData()
+{
+    floatVd.clear();  
+    TMesh *cur_mesh = m_meshGL3D->mesh;
+    floatVd.reserve(cur_mesh->vertices().size() * 3);
+
+    for (Vd vd : cur_mesh->vertices())
+    {
+        const Pnt3 &p = cur_mesh->point(vd);  
+
+        floatVd.push_back(p.x());  
+        floatVd.push_back(p.y());  
+        floatVd.push_back(p.z());  
+    }
+
+    return floatVd.data();
+}
+
 EdgeContainer *ToyView::getSubContourGL(int id)
 {
     int n = static_cast<int>(m_subContourGL.size());

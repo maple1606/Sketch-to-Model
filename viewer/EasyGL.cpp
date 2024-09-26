@@ -19,6 +19,19 @@
 
 #define CAMERADIST 500
 
+// mass-spring system
+static mass_spring_system* g_system;
+static MassSpringSolver* g_solver;
+
+// Constraint Graph
+static CgRootNode* g_cgRootNode;
+
+// Animation
+static const int g_fps = 60; // frames per second  | 60
+static const int g_iter = 5; // iterations per time step | 10
+static const int g_frame_time = 15; // approximate time for frame calculations | 15
+static const int g_animation_timer = (int) ((1.0f / g_fps) * 1000 - g_frame_time);
+
 static void qimage_to_mat(const QImage &image, cv::OutputArray out)
 {
 
@@ -930,12 +943,50 @@ void EasyGL::keyPressEvent(QKeyEvent *e)
                 v->isTransparentMode = false;
 
                 v->repaint();
+                
+                
                 MassSpringBuilder *massSpringBuilder = new MassSpringBuilder();
                 SSkel<SSNodeWithSubToyInfo> cur_sskel = m_curView->m_toy->m_sskel;
 
+                int num_edges = static_cast<int>(cur_sskel.edges.size());
+                unsigned int n = num_edges;
+
                 massSpringBuilder->buildSpringBoneSystem(cur_sskel);  
                 g_system = massSpringBuilder->getResult();       
-                g_solver = new MassSpringSolver(g_system);       
+                g_solver = new MassSpringSolver(g_system, m_curView->GetVFloatData());      
+
+                const float tauc = 0.4f; // critical spring deformation
+	            const unsigned int deformIter = 15; // number of iterations 
+
+                // initialize constraints
+                // spring deformation constraint
+                CgSpringDeformationNode* deformationNode =
+                    new CgSpringDeformationNode(g_system, m_curView->GetVFloatData(), tauc, deformIter);
+                deformationNode->addSprings(massSpringBuilder->getStructIndex());
+
+                // fix top corners
+                CgPointFixNode* cornerFixer = new CgPointFixNode(g_system, m_curView->GetVFloatData());
+                cornerFixer->fixPoint(0);
+                cornerFixer->fixPoint(n - 1);
+
+                CgPointFixNode* mouseFixer = new CgPointFixNode(g_system, m_curView->GetVFloatData());
+
+                // build constraint graph
+                g_cgRootNode = new CgRootNode(g_system, m_curView->GetVFloatData());
+
+                // first layer
+                g_cgRootNode->addChild(deformationNode); 
+
+                // second layer
+                deformationNode->addChild(cornerFixer);
+                deformationNode->addChild(mouseFixer); 
+
+                g_solver->solve(g_iter);
+	            g_solver->solve(g_iter); 
+
+                // fix points
+                CgSatisfyVisitor visitor;
+                visitor.satisfy(*g_cgRootNode);
             }
         }
         else if (e->key() == Qt::Key_G) // Move SubPart

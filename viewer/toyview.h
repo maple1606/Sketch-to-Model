@@ -249,6 +249,9 @@ public:
     int m_selected_wi = 0;  //
     int m_cur_dof_type = 0; // Fixed position
 
+    std::vector<float> floatVd;
+    float* GetVFloatData();
+
     //--------------------------Skeleton --------------------------------------------------
     SkelGL *m_skelGL = nullptr;
     SkelGL *m_restSkelGL = nullptr;
