@@ -69,8 +69,6 @@ public:
     bool isAttachBone = false;
     bool isAttachBoneActivated = false;
 
-    mutable Eigen::Vector3d tip_position;   
-    mutable Eigen::Vector3d tail_position;
     mutable double rest_length;
 
 public:
@@ -89,26 +87,6 @@ public:
     //   that  other bone
     Bone(const Bone *that);
     ~Bone();
-
-    void setTipCoordinate(const Eigen::Vector3d& new_tip_position) const {
-        tip_position = new_tip_position;
-    }
-
-    void setTailCoordinate(const Eigen::Vector3d& new_tail_position) {
-        tail_position = new_tail_position;
-    }
-
-    Eigen::Vector3d getTipCoordinate() const {
-        return tip_position;
-    }
-
-    Eigen::Vector3d getTailCoordinate() const {
-        return tail_position;
-    }
-
-    double calculateLength() const {
-        return (tip_position - tail_position).norm(); 
-    }
 
     // Sets the weight index of this bone. Results in error if bone is root
     // or weight is less than 0

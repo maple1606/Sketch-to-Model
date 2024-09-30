@@ -12,8 +12,8 @@
 namespace SystemParam {
 	static const float time_step = 0.008f; // time step, smaller for better results | 0.008f = 0.016f/2
 	static const float rest_length = 1.05f; // test
-	static const float stiffness = 1.0f; // spring stiffness | 1.0f;
-	static const float mass = 0.25f; // point mass | 0.25f
+	static const float stiffness = 40.0f; // spring stiffness 
+	static const float mass = 0.25f; // point mass 
 	static const float damping_factor = 0.993f; // damping, close to 1.0 | 0.993f
 	static const float gravity = 9.8f * mass; // gravitational force | 9.8f
 }
@@ -83,6 +83,8 @@ private:
 public:
 	MassSpringSolver(mass_spring_system* system, float* vbuff);
 
+	std::vector<float> get_current_state();
+
 	// solve iterations
 	void solve(unsigned int n);
 	void timedSolve(unsigned int ms);
@@ -106,7 +108,7 @@ public:
 	void buildSpringBoneSystem(
         SSkel<SSNodeWithSubToyInfo> &sskel, // skeleton
 		float time_step = SystemParam::time_step,         // time step
-		float rest_length = SystemParam::rest_length,       // spring rest length (non-diagonal)
+		// float rest_length = SystemParam::rest_length,       // spring rest length (non-diagonal)
 		float stiffness = SystemParam::stiffness,         // spring stiffness
 		float mass = SystemParam::mass,              // node mass
 		float damping_factor = SystemParam::damping_factor,    // damping factor

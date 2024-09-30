@@ -199,6 +199,7 @@ public:
 
         // get bones
         vector<BoneType *> B = gather_bones(roots);
+        
         // check bones
         for (typename vector<BoneType *>::iterator bit = B.begin(); bit != B.end(); bit++)
         {
@@ -208,6 +209,7 @@ public:
                 bone_drag = true;
             }
         }
+
         return bone_drag;
     }
 

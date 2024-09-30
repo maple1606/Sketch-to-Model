@@ -694,7 +694,24 @@ void EasyGL::mouseMoveEvent(QMouseEvent *event)
             bool right_click = (event->buttons() & Qt::RightButton);
             bool shift_down = (event->modifiers() & Qt::ShiftModifier);
             bool ctrl_down = (event->modifiers() & Qt::ControlModifier);
+
             // qDebug() << __FILE__ << " " << __LINE__ << " dragBone right_click=" << right_click;
+            g_solver->solve(g_iter);
+            g_solver->solve(g_iter); 
+
+            // fix points
+            CgSatisfyVisitor visitor;
+            visitor.satisfy(*g_cgRootNode);
+
+            std::vector<float> state = g_solver->get_current_state();
+            assert(!state.empty());  
+            m_curView->m_skelGL->floatBd = state;
+
+            // for (const float& value : state) {
+            //    std::cout << value << " ";
+            // }
+            std::cout << std::endl;
+
             m_curView->dragBone(event->pos(), right_click, shift_down, ctrl_down);
         }
         else if (m_opMode == OPMODE_TEXPAINT_IMAGE)
@@ -728,16 +745,9 @@ void EasyGL::mouseMoveEvent(QMouseEvent *event)
             }
             else if (m_opMode == OPMODE_BBW_DEFORM)
             {
+                m_curView->m_skelGL->update(v);
                 m_curView->updateSubMeshDeform(v);
                 m_curView->m_meshGL3D->update(v);
-                m_curView->m_skelGL->update(v);
-
-                g_solver->solve(g_iter);
-	            g_solver->solve(g_iter); 
-
-                // fix points
-                CgSatisfyVisitor visitor;
-                visitor.satisfy(*g_cgRootNode);
             }
             else if (m_opMode == OPMODE_EDIT_BONE)
             {
@@ -959,8 +969,10 @@ void EasyGL::keyPressEvent(QKeyEvent *e)
                 unsigned int n = num_edges;
 
                 massSpringBuilder->buildSpringBoneSystem(cur_sskel);  
-                g_system = massSpringBuilder->getResult();       
-                g_solver = new MassSpringSolver(g_system, m_curView->GetVFloatData());      
+                g_system = massSpringBuilder->getResult(); 
+                // m_curView->m_skelGL->get_tips_float_data();
+                
+                g_solver = new MassSpringSolver(g_system, m_curView->m_skelGL->get_tips_float_data());      
 
                 const float tauc = 0.12f; // critical spring deformation
 	            const unsigned int deformIter = 15; // number of iterations 
@@ -968,19 +980,19 @@ void EasyGL::keyPressEvent(QKeyEvent *e)
                 // initialize constraints
                 // spring deformation constraint
                 CgSpringDeformationNode* deformationNode =
-                    new CgSpringDeformationNode(g_system, m_curView->GetVFloatData(), tauc, deformIter);
+                    new CgSpringDeformationNode(g_system, m_curView->m_skelGL->get_tips_float_data(), tauc, deformIter);
                 deformationNode->addSprings(massSpringBuilder->getStructIndex());
 
-                CgPointFixNode* mouseFixer = new CgPointFixNode(g_system, m_curView->GetVFloatData());
+                CgPointFixNode* mouseFixer = new CgPointFixNode(g_system, m_curView->m_skelGL->get_tips_float_data());
 
                 // build constraint graph
-                g_cgRootNode = new CgRootNode(g_system, m_curView->GetVFloatData());
+                g_cgRootNode = new CgRootNode(g_system, m_curView->m_skelGL->get_tips_float_data());
 
                 // first layer
                 g_cgRootNode->addChild(deformationNode); 
 
                 // second layer
-                deformationNode->addChild(mouseFixer); 
+                deformationNode->addChild(mouseFixer);
             }
         }
         else if (e->key() == Qt::Key_G) // Move SubPart

@@ -417,24 +417,6 @@ void ToyView::extract_part_contour(const std::vector<Pnt3> &outer_contour, EasyG
     cv::imwrite("output/part_poly.jpg", img);
 }
 
-float* ToyView::GetVFloatData()
-{
-    floatVd.clear();  
-    TMesh *cur_mesh = m_meshGL3D->mesh;
-    floatVd.reserve(cur_mesh->vertices().size() * 3);
-
-    for (Vd vd : cur_mesh->vertices())
-    {
-        const Pnt3 &p = cur_mesh->point(vd);  
-
-        floatVd.push_back(p.x());  
-        floatVd.push_back(p.y());  
-        floatVd.push_back(p.z());  
-    }
-
-    return floatVd.data();
-}
-
 EdgeContainer *ToyView::getSubContourGL(int id)
 {
     int n = static_cast<int>(m_subContourGL.size());
@@ -2257,6 +2239,7 @@ void SkelGL::draw(EasyGL *gl)
 
 void SkelGL::compute_element(EasyGL *gl)
 {
+    // bones are arranged in bfs order
     vector<Bone *> bones = gather_bones(skel->roots);
     vector<int> selected;
     vector<GLVec3> colors;
@@ -2266,6 +2249,7 @@ void SkelGL::compute_element(EasyGL *gl)
     int i = 0;
     for (Bone *b : bones)
     {
+        cout << "index " << i << "\n";
         if (b->is_root())
         {
             if (b->isAttachBone)
@@ -2280,7 +2264,11 @@ void SkelGL::compute_element(EasyGL *gl)
             {
                 if (gl->m_opMode == OPMODE_BBW_DEFORM)
                 {
-                    const Pnt3 &tip = b->tip_as_drawn();
+                    Pnt3 glvec(floatBd[3 * i], floatBd[3 * i + 1], floatBd[3 * i + 2]);
+                    const Pnt3 &tip = glvec;
+                    // cout << floatBd[3 * i] << " " << floatBd[3 * i + 1] << " " << floatBd[3 * i + 2] << "\n";
+                    // cout << tip.x() << " " << tip.y() << " " << tip.z() << "\n";
+
                     tips.push_back(GLVec3(tip.x(), tip.y(), tip.z() + 0.2));
                 }
                 else
@@ -2300,13 +2288,18 @@ void SkelGL::compute_element(EasyGL *gl)
         {
             if (gl->m_opMode == OPMODE_BBW_DEFORM)
             {
+                Pnt3 glvec(floatBd[3 * i], floatBd[3 * i + 1], floatBd[3 * i + 2]);
+
                 // kamehame mark
                 const Pnt3 &tail = b->get_parent()->tip_as_drawn();
-                const Pnt3 &tip = b->tip_as_drawn();
+                const Pnt3 &tip = glvec;
+
+                // cout << floatBd[3 * i] << " " << floatBd[3 * i + 1] << " " << floatBd[3 * i + 2] << "\n";
+                // cout << tip.x() << " " << tip.y() << " " << tip.z() << "\n";
+                
                 tips.push_back(GLVec3(tip.x(), tip.y(), tip.z() + 0.2));
                 lines.push_back(GLVec3(tail.x(), tail.y(), tail.z() + 0.2));
                 lines.push_back(GLVec3(tip.x(), tip.y(), tip.z() + 0.2));
-                
             }
             else
             {
@@ -2392,6 +2385,22 @@ void SkelGL::compute_drag_line(EasyGL *gl, Bone *bone)
     dragline_container[0].setDrawLines(true);
     dragline_container[1].setColor(drag_color);
     dragline_container[1].setEdgeWidth(3.0);
+}
+
+float* SkelGL::get_tips_float_data()
+{
+    // bones are arranged in bfs order
+    floatBd.clear();  
+
+    for (GLVec3 p : tips)
+    {
+        floatBd.push_back(p.x);  
+        floatBd.push_back(p.y);  
+        floatBd.push_back(p.z);  
+
+        // cout << "Joint position: " << "(" << p.x << ", " << p.y << ", " << p.z << ")\n"; 
+    }
+    return floatBd.data();
 }
 
 void ArcBallGL::removeViewer(EasyGL *gl)

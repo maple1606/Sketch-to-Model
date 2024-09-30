@@ -595,7 +595,6 @@ bool Bone::drag(int sx, int sy,
                 float *viewMatrix, float *mvpMatrix,
                 bool right_click, bool shift_down, bool ctrl_down)
 {
-
     if (is_selected)
     {
         if (right_click)
@@ -715,18 +714,13 @@ bool Bone::drag(int sx, int sy,
             {
                 Vector3d tail = parent->tip_as_drawn();
 
-                setTipCoordinate(new_tip);
-                setTailCoordinate(tail);
-
-                double current_length = calculateLength();
+                double current_length = (new_tip - tail).norm();
 
                 // cout << initial_length << endl;
                 if (current_length != rest_length)
                 {
                     Vector3d direction = (new_tip - tail).normalized();
                     new_tip = tail + direction * rest_length;
-                    
-                    setTipCoordinate(new_tip);
                 }
             }
 

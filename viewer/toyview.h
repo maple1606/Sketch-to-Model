@@ -3,6 +3,11 @@
 
 #include <vector>
 #include <Eigen/Eigen>
+#include <Eigen/Dense>
+#include <Eigen/Sparse>
+#include <vector>
+#include <unordered_map>
+#include <unordered_set>
 
 #include <QOpenGLShaderProgram>
 #include <QOpenGLBuffer>
@@ -249,9 +254,6 @@ public:
     int m_selected_wi = 0;  //
     int m_cur_dof_type = 0; // Fixed position
 
-    std::vector<float> floatVd;
-    float* GetVFloatData();
-
     //--------------------------Skeleton --------------------------------------------------
     SkelGL *m_skelGL = nullptr;
     SkelGL *m_restSkelGL = nullptr;
@@ -316,6 +318,7 @@ public:
     void draw(EasyGL *gl);
     void compute_element(EasyGL *gl);
     void compute_drag_line(EasyGL *gl, Bone *bone);
+    float *get_tips_float_data();
 
     Skeleton<Bone> *skel;
     std::vector<GLVec3> tips;         // Bone tip
@@ -325,6 +328,7 @@ public:
     EdgeContainer line_container;
     EdgeContainer dragline_container[2];
     static QColor bone_color;
+    std::vector<float> floatBd;
 };
 
 class ArcBallGL
