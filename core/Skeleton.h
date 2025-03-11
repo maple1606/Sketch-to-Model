@@ -5,6 +5,7 @@
 
 #include "common.h"
 #include "EGL.h"
+class CgPointFixNode;
 
 template <typename BoneType>
 class Skeleton;
@@ -46,6 +47,8 @@ public:
     typedef std::function<void(const Skeleton<BoneType> &)> SkeletonCallback;
     // Callback called after setting editing field
     SkeletonCallback after_set_editing; //ToDO: remove
+
+    std::vector<float> floatBd;
 
     // Editting rest positon
     bool editing;
@@ -112,7 +115,7 @@ public:
         }
     }
 
-    BoneType *pick_bone(int sx, int sy, int width, int height, float *mvpMatrix, bool shift_down, bool ctrl_down)
+    BoneType *pick_bone(int sx, int sy, CgPointFixNode* fixer, int width, int height, float *mvpMatrix, bool shift_down, bool ctrl_down)
     {
         using namespace std;
         using namespace Eigen;
@@ -124,6 +127,7 @@ public:
         vector<BoneType *> sel_bs; // selected bones
         BoneType *nearest_b = nullptr;
         double min_z = std::numeric_limits<double>::max();
+        int i = 0;
         for (typename vector<BoneType *>::iterator bit = B.begin();
              bit != B.end(); bit++)
         {
@@ -142,6 +146,10 @@ public:
                     min_z = sd[2];
                     nearest_b = b;
                 }
+            }
+            if (b->is_tip_selected)
+            {
+                fixer->fixPoint(i);
             }
         }
 
@@ -189,11 +197,12 @@ public:
     }
 
     bool drag_bone(int sx, int sy,
+                   CgPointFixNode* fixer,
                    int width, int height,
                    float *viewMatrix, float *mvpMatrix,
                    bool right_click, bool shift_down, bool ctrl_down)
     {
-
+        
         using namespace std;
         bool bone_drag = false;
 
@@ -201,13 +210,24 @@ public:
         vector<BoneType *> B = gather_bones(roots);
         
         // check bones
+        int i = 0;
         for (typename vector<BoneType *>::iterator bit = B.begin(); bit != B.end(); bit++)
         {
             BoneType *b = (*bit);
-            if (b->drag(sx, sy, width, height, viewMatrix, mvpMatrix, right_click, shift_down, ctrl_down))
+            Pnt3 glvec(floatBd[3 * i], floatBd[3 * i + 1], floatBd[3 * i + 2]);
+
+            if (b->is_tip_selected)
             {
-                bone_drag = true;
+                fixer->releasePoint(i);
+                b->glvec = glvec;
+                // implement the func for fixed joint movement here
+                if (b->drag_fixed_joint(sx, sy, width, height, viewMatrix, mvpMatrix, right_click, shift_down, ctrl_down))
+                {
+                    bone_drag = true;
+                }
+                fixer->fixPoint(i);
             }
+            i++;
         }
 
         return bone_drag;

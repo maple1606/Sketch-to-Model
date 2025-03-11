@@ -24,6 +24,7 @@
 #include "Viewer_interface.h"
 #include "containers.h"
 #include "common.h"
+#include "MassSpringSolver.h"
 
 class EasyGL;
 class MeshGL;
@@ -147,8 +148,8 @@ public:
     void updateDefContour(EasyGL *gl);
     void drawDefContour(EasyGL *gl);
     // -------------------------Fast Automatic Skinning for Posture Deformation-------------
-    void pickBone(const QPoint &pixel, bool shift_down, bool ctrl_down);
-    void dragBone(const QPoint &pixel, bool right_click, bool shift_down, bool ctrl_down);
+    void pickBone(const QPoint &pixel, CgPointFixNode* fixer, bool shift_down, bool ctrl_down);
+    void dragBone(const QPoint &pixel, CgPointFixNode* fixer, bool right_click, bool shift_down, bool ctrl_down);
     void releaseBone(EasyGL *gl);
     void deleteBone();
     void recoverRestPose(EasyGL *gl);
@@ -328,6 +329,7 @@ public:
     EdgeContainer line_container;
     EdgeContainer dragline_container[2];
     static QColor bone_color;
+    CgPointFixNode* fixer;
     std::vector<float> floatBd;
 };
 

@@ -117,6 +117,7 @@ ToyView::ToyView()
     defCtrlPts_gl.setColor(CTRL_PT_COLOR);
     // skeleton
     m_skelGL = new SkelGL(m_toy->skel);
+
     m_restSkelGL = new SkelGL(m_toy->restSkel);
     // arcball
     m_arcBallGL = new ArcBallGL();
@@ -983,6 +984,7 @@ void ToyView::translate(const QPoint &pos, EasyGL *gl)
     m_subMeshGLDeform[id]->compute_element();
     m_subMeshGL3D[id]->compute_element();
     m_skelGL->compute_element(gl);
+    m_toy->skel->floatBd = m_skelGL->floatBd;
     m_restSkelGL->compute_element(gl);
     update_mesh_color();
 }
@@ -1017,6 +1019,7 @@ void ToyView::rotate(int axis, int angle, EasyGL *gl)
     m_subMeshGLDeform[id]->compute_element();
     m_subMeshGL3D[id]->compute_element();
     m_skelGL->compute_element(gl);
+    m_toy->skel->floatBd = m_skelGL->floatBd;
     m_restSkelGL->compute_element(gl);
     update_mesh_color();
 }
@@ -1155,11 +1158,11 @@ void ToyView::paintAuto2D(EasyGL *gl)
     }
 }
 
-void ToyView::pickBone(const QPoint &pixel, bool shift_down, bool ctrl_down)
+void ToyView::pickBone(const QPoint &pixel, CgPointFixNode* fixer, bool shift_down, bool ctrl_down)
 {
     EasyGL *m_gl = qobject_cast<EasyGL *>(Three::currentViewer());
     // Bone *bone = m_toy->skel->pick_bone(pixel.x(), pixel.y(), m_gl->width(), m_gl->height(), m_gl->m_mvp.data(), shift_down, ctrl_down);
-    Bone *bone = m_toy->pick_bone(pixel.x(), pixel.y(), m_gl->width(), m_gl->height(), m_gl->m_mvp.data(), shift_down, ctrl_down);
+    Bone *bone = m_toy->pick_bone(pixel.x(), pixel.y(), fixer, m_gl->width(), m_gl->height(), m_gl->m_mvp.data(), shift_down, ctrl_down);
     if (ctrl_down && bone != nullptr)
     {
         m_selBones.push_back(bone);
@@ -1171,10 +1174,11 @@ void ToyView::pickBone(const QPoint &pixel, bool shift_down, bool ctrl_down)
     }
 }
 
-void ToyView::dragBone(const QPoint &pixel, bool right_click, bool shift_down, bool ctrl_down)
+void ToyView::dragBone(const QPoint &pixel, CgPointFixNode* fixer, bool right_click, bool shift_down, bool ctrl_down)
 {
     EasyGL *gl = qobject_cast<EasyGL *>(Three::currentViewer());
     m_toy->drag_bone(pixel.x(), pixel.y(),
+                     fixer,
                      gl->width(), gl->height(),
                      gl->m_viewMatrix.data(), gl->m_mvp.data(),
                      right_click, shift_down, ctrl_down);
@@ -1231,6 +1235,7 @@ void ToyView::recoverRestPose(EasyGL *gl)
 void ToyView::update_skel(EasyGL *gl)
 {
     m_skelGL->compute_element(gl);
+    m_toy->skel->floatBd = m_skelGL->floatBd;
     m_skelGL->update(gl);
 }
 
@@ -2239,7 +2244,6 @@ void SkelGL::draw(EasyGL *gl)
 
 void SkelGL::compute_element(EasyGL *gl)
 {
-    // bones are arranged in bfs order
     vector<Bone *> bones = gather_bones(skel->roots);
     vector<int> selected;
     vector<GLVec3> colors;
@@ -2249,7 +2253,6 @@ void SkelGL::compute_element(EasyGL *gl)
     int i = 0;
     for (Bone *b : bones)
     {
-        cout << "index " << i << "\n";
         if (b->is_root())
         {
             if (b->isAttachBone)
@@ -2264,11 +2267,7 @@ void SkelGL::compute_element(EasyGL *gl)
             {
                 if (gl->m_opMode == OPMODE_BBW_DEFORM)
                 {
-                    Pnt3 glvec(floatBd[3 * i], floatBd[3 * i + 1], floatBd[3 * i + 2]);
-                    const Pnt3 &tip = glvec;
-                    // cout << floatBd[3 * i] << " " << floatBd[3 * i + 1] << " " << floatBd[3 * i + 2] << "\n";
-                    // cout << tip.x() << " " << tip.y() << " " << tip.z() << "\n";
-
+                    const Pnt3 &tip = b->tip_as_drawn();
                     tips.push_back(GLVec3(tip.x(), tip.y(), tip.z() + 0.2));
                 }
                 else
@@ -2288,15 +2287,8 @@ void SkelGL::compute_element(EasyGL *gl)
         {
             if (gl->m_opMode == OPMODE_BBW_DEFORM)
             {
-                Pnt3 glvec(floatBd[3 * i], floatBd[3 * i + 1], floatBd[3 * i + 2]);
-
-                // kamehame mark
                 const Pnt3 &tail = b->get_parent()->tip_as_drawn();
-                const Pnt3 &tip = glvec;
-
-                // cout << floatBd[3 * i] << " " << floatBd[3 * i + 1] << " " << floatBd[3 * i + 2] << "\n";
-                // cout << tip.x() << " " << tip.y() << " " << tip.z() << "\n";
-                
+                const Pnt3 &tip = b->tip_as_drawn();
                 tips.push_back(GLVec3(tip.x(), tip.y(), tip.z() + 0.2));
                 lines.push_back(GLVec3(tail.x(), tail.y(), tail.z() + 0.2));
                 lines.push_back(GLVec3(tip.x(), tip.y(), tip.z() + 0.2));

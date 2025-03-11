@@ -321,42 +321,6 @@ Eigen::Quaterniond Bone::orientation() const
 //    children think it is or use this bone's position
 // Returns the current position of the tip of this bone, the point shared
 // by this bone and its children if any
-Eigen::Vector3d Bone::tip(
-    const bool according_to_last_T,
-    const bool average_children_tails) const
-{
-    // assert(stretch == 1);
-    // assert(twist == 0);
-    if (average_children_tails && children.size() > 0)
-    {
-        Vector3d t(0, 0, 0);
-        vector<Bone *> children = get_children();
-        for (
-            vector<Bone *>::iterator cit = children.begin();
-            cit != children.end();
-            cit++)
-        {
-            assert((*cit)->parent == this);
-            t += (*cit)->tail(according_to_last_T);
-        }
-        t /= children.size();
-        // cout << __FILE__ << " " << __LINE__ << " average_children_tails: " << t.transpose() << endl;
-        return t;
-    }
-    else
-    {
-        if (according_to_last_T)
-        {
-            // cout << __FILE__ << " " << __LINE__ << " according_to_last_T: " << according_to_last_T << endl;
-            return last_T * rest_tip();
-        }
-        else
-        {
-            // cout << __FILE__ << " " << __LINE__ << " not according_to_last_T" << endl;
-            return affine() * rest_tip();
-        }
-    }
-}
 
 Eigen::Vector3d Bone::tip_as_drawn() const
 {
@@ -364,9 +328,46 @@ Eigen::Vector3d Bone::tip_as_drawn() const
     bool average_children_tails =
         skel->average_children_tails_to_draw_non_weighted_roots &&
         is_root() && wi < 0;
-   
+
+    // call the modified tip() function, which now blends toward `glvec`
     return tip(according_to_last_T, average_children_tails);
 }
+
+
+Eigen::Vector3d Bone::tip(
+    const bool according_to_last_T, 
+    const bool average_children_tails) const
+{
+    Eigen::Vector3d computed_tip;
+
+    if (average_children_tails && children.size() > 0)
+    {
+        Vector3d t(0, 0, 0);
+        vector<Bone *> children = get_children();
+        for (vector<Bone *>::iterator cit = children.begin();
+             cit != children.end(); cit++)
+        {
+            assert((*cit)->parent == this);
+            t += (*cit)->tail(according_to_last_T);
+        }
+        t /= children.size();
+        computed_tip = t;
+    }
+    else
+    {
+        if (according_to_last_T)
+        {
+            computed_tip = last_T * rest_tip();
+        }
+        else
+        {
+            computed_tip = affine() * rest_tip();
+        }
+    }
+
+    return compute_secondary_movement(computed_tip);
+}
+
 
 // Inputs:
 //  according_to_last_T  whether to use last_T or bone's transformation
@@ -420,6 +421,59 @@ Eigen::Vector3d Bone::rest_tail() const
     return parent->rest_tip();
 }
 
+const double screen_width = 1920;  // Example screen size
+const double screen_height = 1080;
+
+Eigen::Vector3d Bone::compute_secondary_movement(const Eigen::Vector3d& current_position) const
+{
+    constexpr float stiffness = 10.0f;  // Higher stiffness should now slow down movement
+    constexpr float damping = 0.9f;     // Higher damping reduces oscillation
+    constexpr float deltaTime = 0.016f; // Assuming ~60 FPS
+    constexpr float base_mass = 1.0f;   // Default mass
+    constexpr float beta = 0.05f;       // Scaling factor for effective mass
+
+    static Eigen::Vector3d velocity = Eigen::Vector3d::Zero();
+
+    // **Check if `glvec` is valid**
+    if (!glvec.allFinite()) {
+        std::cerr << "gl invalid" << std::endl;
+        return current_position;
+    }
+
+    // **Check if `glvec` is out of screen**
+    if (glvec.x() < -screen_width / 2 || glvec.x() > screen_width / 2 ||
+        glvec.y() < -screen_height / 2 || glvec.y() > screen_height / 2) {
+        std::cerr << "gl out of screen" << std::endl;
+        return current_position;
+    }
+
+    // **Check if `current_position` is valid**
+    if (!current_position.allFinite()) {
+        std::cerr << "cp invalid" << std::endl;
+        return current_position;
+    }
+
+    // **Check if `current_position` is out of screen**
+    if (current_position.x() < -screen_width / 2 || current_position.x() > screen_width / 2 ||
+        current_position.y() < -screen_height / 2 || current_position.y() > screen_height / 2) {
+        std::cerr << "cp out of screen" << std::endl;
+        return current_position;
+    }
+
+    // **Modify effective mass based on stiffness**
+    double effective_mass = base_mass * (1.0 + beta * stiffness);
+
+    // Compute force based on Hooke's Law
+    Eigen::Vector3d displacement = glvec - current_position;
+    Eigen::Vector3d force = -500/(stiffness) * displacement - damping * velocity;
+
+    // Update velocity with adjusted acceleration
+    velocity += (force / effective_mass) * deltaTime;
+
+    // Apply movement update
+    return current_position + velocity * deltaTime;
+}
+
 // Returns the current affine transformation via Forward Kinematics of this bone
 // a combination of rotation and translation
 Eigen::Transform<double, 3, Eigen::Affine> Bone::affine() const
@@ -437,7 +491,11 @@ Eigen::Transform<double, 3, Eigen::Affine> Bone::affine() const
     }
     // calculates one's transformation by first calculating its parent's transformation. 
     // gotta make sure that all bones are positioned relative to their parent
-    return p_affine.rotate(rotation).translate(translation);
+
+    Eigen::Vector3d updated_translation = compute_secondary_movement(translation);
+
+    // Apply rotation and updated translation
+    return p_affine.rotate(rotation).translate(updated_translation);
 }
 
 // Returns the current rotated frame via Forward Kinematics of this
@@ -588,194 +646,51 @@ void Bone::tip_color(double pcolor[3]) const
     }
 }
 
-Eigen::Vector3d Bone::velocity(0, 0, 0);
-
-bool Bone::drag(int sx, int sy,
-                int width, int height,
-                float *viewMatrix, float *mvpMatrix,
-                bool right_click, bool shift_down, bool ctrl_down)
+bool Bone::drag_fixed_joint(int sx, int sy,
+              int width, int height,
+              float *viewMatrix, float *mvpMatrix,
+              bool right_click, bool shift_down, bool ctrl_down)
 {
     if (is_selected)
     {
-        if (right_click)
+        Vector3d old_tip = tip_as_drawn();
+        Vector3d sold_tip; 
+
+        EGL::project(old_tip.x(), old_tip.y(), old_tip.z(), width, height, mvpMatrix, sold_tip[0], sold_tip[1], sold_tip[2]);
+        double sz = sold_tip[2];
+
+        Vector3d new_tip;
+        EGL::unproject(sx, sy, sz, width, height, mvpMatrix, new_tip[0], new_tip[1], new_tip[2]);
+
+        if (!is_root())
         {
-            dragging_rotation = true;
-            // M_DEBUG << " Bone::drag rotation" << endl;
-            if (is_tip_selected)
+            Vector3d tail = parent->tip_as_drawn();
+
+            double current_length = (new_tip - tail).norm();
+            if (current_length != rest_length)
             {
-                // M_DEBUG << " Bone::drag is_tip_selected" << endl;
-                Vector3d axis;
-                EGL::view_dir(viewMatrix, axis[0], axis[1], axis[2]);
-                axis.normalize();
-
-                // ToDO: change bone's dot version
-                double angle = -2.0 * M_PI * 360.0 * ((sx - last_x) / 400.0) / 360.0;
-                // Get change in rotation as quaternion
-                Quat delta_rot = Quat(Eigen::AngleAxis<double>(angle, axis));
-                // Offset *ALL* rotations so that rotations are about the parent (self in
-                // case of roots)
-                Vector3d tail = offset;
-                if (!is_root())
-                {
-                    tail = parent->rest_tip();
-                }
-
-                if (skel->get_editing())
-                {
-                    // cout << __FILE__ << " " << __LINE__ << " Bone::drag is_editing" << endl;
-                    Tform3 A(Tform3::Identity());
-                    A.rotate(delta_rot);
-                    if (!is_root())
-                    {
-                        // rotate my offset, if I'm not a root
-                        offset = A * offset;
-                    }
-                    // rotate offsets of descendents
-                    apply_affine_to_kin(A);
-                }
-                else
-                {
-                    Vector3d ot = (rotation * (translation + tail)) - tail;
-                    // cout << __FILE__ << " " << __LINE__
-                    //      << "tail=" << tail.transpose()
-                    //      << "translation=" << translation.transpose()
-                    //      << " Bone::drag rotation\n"
-                    //      << delta_rot.matrix()
-                    //      << " oriented translation=" << ot.transpose()
-                    //      << endl;
-                    rotation = delta_rot * rotation;
-                    // center rotations around offset point for roots
-                    translation = rotation.inverse() * (tail + ot) - tail;
-                    // why rotation.inverse not rotation, because need mapping back to worldspace
-                }
-
-                is_tip_changed = true;
-            }
-            else if (is_line_segment_selected)
-            {
-                // twist about bone
-                assert(!is_root());
-                Vector3d d = rest_tip();
-                Vector3d s = parent->rest_tip();
-                Vector3d axis = s - d;
-                double angle = -2.0 * M_PI * 360.0 * ((sx - last_x) / 400.0) / 360.0;
-                // Offset *ALL* rotations so that rotations are about the parent (self in
-                // case of roots)
-                Vector3d tail = offset;
-                Quat delta_rot = Quat(Eigen::AngleAxis<double>(angle, axis));
-                if (!is_root())
-                {
-                    tail = parent->rest_tip();
-                }
-
-                if (skel->get_editing())
-                {
-                    // rotate offsets of descendents
-                    Tform3 A(Tform3::Identity());
-                    A.rotate(delta_rot);
-                    if (!is_root())
-                    {
-                        // rotate my offset, if I'm not a root
-                        offset = A * offset;
-                    }
-                    // rotate offsets of descendents
-                    apply_affine_to_kin(A);
-                }
-                else
-                {
-                    Vector3d ot = (rotation * (translation + tail)) - tail;
-                    rotation = delta_rot * rotation;
-                    // center rotations around offset point for roots
-                    translation = rotation.inverse() * (tail + ot) - tail; // why rotation.inverse not rotation
-                }
-            }
-            else
-            {
-                assert(false);
+                Vector3d direction = (new_tip - tail).normalized();
+                new_tip = tail + direction * rest_length;
             }
         }
-        else
+
+        Vector3d at = new_tip - old_tip; 
+        Vector3d p_at(0, 0, 0);
+
+        if (parent != NULL)
         {
-            Vector3d old_tip = tip_as_drawn(); // current 3D position of the bone’s tip in world coordinates
-            Vector3d sold_tip; // screen-space representation of the bone’s 3D tip position after projection
-            // 3D world coordinates to 2D screen coordinates
-            EGL::project(old_tip.x(), old_tip.y(), old_tip.z(), width, height, mvpMatrix, sold_tip[0], sold_tip[1], sold_tip[2]);
-            double sz = sold_tip[2];
-            // cout << __FILE__ << " " << __LINE__ << " old_tip=" << old_tip.transpose() << " sold_tip=" << sold_tip.transpose() << endl;
-
-            Vector3d new_tip;
-            // 2D screen coordinates back into 3D world coordinates
-            EGL::unproject(sx, sy, sz, width, height, mvpMatrix, new_tip[0], new_tip[1], new_tip[2]);
-            // cout << __FILE__ << " " << __LINE__ << " sx=" << sx << " sy=" << sy << " sz=" << sz << " width=" << width
-            //      << " height=" << height << " mvpMatrix=\n"
-            //      << Map<Matrix4f>(mvpMatrix) << endl;
-
-            if (!is_root())
-            {
-                Vector3d tail = parent->tip_as_drawn();
-
-                double current_length = (new_tip - tail).norm();
-
-                // cout << initial_length << endl;
-                if (current_length != rest_length)
-                {
-                    Vector3d direction = (new_tip - tail).normalized();
-                    new_tip = tail + direction * rest_length;
-                }
-            }
-
-            Vector3d at = new_tip - old_tip; // how much the tip should move in 3D world space 
-            Vector3d p_at(0, 0, 0);
-
-            // cout << __FILE__ << " " << __LINE__ << ": new_tip=" << new_tip.transpose()
-            //      << " old_tip=" << old_tip.transpose()
-            //      << " sold_tip=" << sold_tip.transpose() << endl;
-
-            if (parent != NULL)
-            {
-                p_at = parent->affine().translation();
-            }
-
-            // uses inverse to transform to the bone’s local coordinate system
-            Vector3d trans_update = orientation().inverse() * at;
-
-            if (skel->get_editing())
-            {
-                if (is_line_segment_selected)
-                {
-                    parent->offset += trans_update;
-                    parent->is_tip_selected = true;
-                }
-                else
-                {
-                    // M_DEBUG << "offset=" << offset.transpose() << ", trans_update=" << trans_update.transpose() << endl;
-                    offset += trans_update;
-                    is_tip_changed = true;
-                }
-
-                // Comment the following three lines to make all descendants move as this bone
-                Tform3 A(Tform3::Identity());
-                A.translate(-trans_update);
-                apply_affine_to_kin(A);
-            }
-            else
-            {
-                // set translation to put rest tip at new tip position
-                translation += trans_update;
-                is_tip_changed = true;
-                // cout << __FILE__ << " " << __LINE__ << " trans_update=" << trans_update.transpose() << " translation=" << translation.transpose() << endl;
-            }
+            p_at = parent->affine().translation();
         }
+
+        Vector3d trans_update = orientation().inverse() * at;
+
+        translation += trans_update;
+        is_tip_changed = true;
     }
 
     last_x = sx;
     last_y = sy;
     return is_selected;
-}
-
-void Bone::secondaryMovement(Vector3d displacement) 
-{
-    
 }
 
 void Bone::line_segment_color(double lcolor[3]) const

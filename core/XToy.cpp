@@ -1348,6 +1348,7 @@ void XToy::gather_subT(int width, int height, float *mvpMatrix, XSubToy *subToy)
 
 
 bool XToy::drag_bone(int sx, int sy,
+                     CgPointFixNode* fixer,
                      int width, int height,
                      float *viewMatrix, float *mvpMatrix,
                      bool right_click, bool shift_down, bool ctrl_down)
@@ -1357,7 +1358,7 @@ bool XToy::drag_bone(int sx, int sy,
     {
         // M_DEBUG << "gather and distribute transformatioins..." << endl;
         // skel->draw_according_to_last_T = dial_in_each_T; //ToDO
-        skel->drag_bone(sx, sy, width, height, viewMatrix, mvpMatrix, right_click, shift_down, ctrl_down);
+        skel->drag_bone(sx, sy, fixer, width, height, viewMatrix, mvpMatrix, right_click, shift_down, ctrl_down);
         bool success = gather_transformations(skel->roots, dial_in_each_T, T);
         if (success)
         {
@@ -1365,7 +1366,7 @@ bool XToy::drag_bone(int sx, int sy,
             // M_DEBUG << " T=" << T.rows() << ", " << T.cols() << endl;
             // cout << T.transpose() << endl;
 
-            // 3D LBS
+            // 3D LBS - 
             if (auto_dof)
             {   
                 // compute the transformation matrix
@@ -1384,14 +1385,14 @@ bool XToy::drag_bone(int sx, int sy,
     }
     else
     {
-        skel->drag_bone(sx, sy, width, height, viewMatrix, mvpMatrix, right_click, shift_down, ctrl_down);
+        skel->drag_bone(sx, sy, fixer, width, height, viewMatrix, mvpMatrix, right_click, shift_down, ctrl_down);
     }
 	return true;
 }
 
-Bone *XToy::pick_bone(int sx, int sy, int width, int height, float *mvpMatrix, bool shift_down, bool ctrl_down)
+Bone *XToy::pick_bone(int sx, int sy, CgPointFixNode* fixer, int width, int height, float *mvpMatrix, bool shift_down, bool ctrl_down)
 {
-    Bone *b = skel->pick_bone(sx, sy, width, height, mvpMatrix, shift_down, ctrl_down);
+    Bone *b = skel->pick_bone(sx, sy, fixer, width, height, mvpMatrix, shift_down, ctrl_down);
     if (b != NULL)
     {
         m_curSubToyIdx = b->subtoy_id;
@@ -1648,6 +1649,7 @@ bool XToy::transformations()
     bool gather_success = gather_transformations(skel->roots, dial_in_each_T, T);
     if (!gather_success)
     {
+
         return false;
     }
     //ToDO

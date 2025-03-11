@@ -51,6 +51,7 @@ inline bool gather_transformations(
     for (std::vector<Bone *>::iterator bit = B.begin(); bit != B.end(); bit++)
     {
         Bone *b = (*bit);
+        
         if (b->wi_is_set())
         {
             int wi = b->get_wi();
@@ -68,19 +69,14 @@ inline bool gather_transformations(
             {
                 // compute current transformation at bone
                 Tform3 bT;
-                if (use_last_T)
-                {
-                    bT = b->last_T;
-                }
-                else
-                {
-                    bT = b->affine();
-                }
+                bT = b->affine();
+                
                 int idx = B2I[b] - BR.size();
                 // M_DEBUG << "handle" << wi << " B2I=" << B2I[b] << " " << idx << endl;
                 // cout << T.block(0, idx * 4, 3, 4) << endl;
                 // place transform into T stack
                 T.block(0, idx * 4, 3, 4) = bT.affine().matrix();
+
                 // M_DEBUG << ": handle" << wi << " affine=\n";
                 // cout << T.block(0, b->get_wi() * 4, 3, 4) << endl;
             }

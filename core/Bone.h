@@ -69,6 +69,8 @@ public:
     bool isAttachBone = false;
     bool isAttachBoneActivated = false;
 
+    Eigen::Vector3d tip_coordinate;
+    Eigen::Vector3d tail_coordinate;
     mutable double rest_length;
 
 public:
@@ -145,6 +147,25 @@ public:
     Eigen::Vector3d rest_tail() const;
     // Returns the current affine transformation via Forward Kinematics of this
     // bone
+
+    Eigen::Vector3d getTipCoordinate() const {
+        return tip_coordinate;
+    }
+
+    void setTipCoordinate(const Eigen::Vector3d& tip) {
+        tip_coordinate = tip;
+    }
+
+    Eigen::Vector3d getTailCoordinate() const {
+        return tail_coordinate;
+    }
+
+    void setTailCoordinate(const Eigen::Vector3d& tail) {
+        tail_coordinate = tail;
+    }
+
+    Eigen::Vector3d compute_secondary_movement(const Eigen::Vector3d& current_position) const;
+
     Eigen::Transform<double, 3, Eigen::Affine> affine() const;
     // Returns the current rotated frame via Forward Kinematics of this
     // bone
@@ -191,6 +212,8 @@ public:
     int down_x;
     int down_y;
 
+    Pnt3 glvec;
+
     double deltaTime = 0.016;
     static Eigen::Vector3d velocity;
 
@@ -202,13 +225,11 @@ public:
 
     void up();
 
-    bool drag(int sx, int sy,
+    bool drag_fixed_joint(int sx, int sy,
               int width, int height,
               float *viewMatrix, float *mvpMatrix,
               bool right_click, bool shift_down, bool ctrl_down);
-
-    void secondaryMovement(Eigen::Vector3d at);
-
+              
     void tip_color(double pcolor[3]) const;
     void line_segment_color(double lcolor[3]) const;
     void translate(const Vec3 &trans_update)

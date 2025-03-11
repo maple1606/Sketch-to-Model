@@ -10,10 +10,10 @@
 #include "straight_skeletor.h"
 
 namespace SystemParam {
-	static const float time_step = 0.008f; // time step, smaller for better results | 0.008f = 0.016f/2
+	static const float time_step = 0.016f; // time step, smaller for better results | 0.008f = 0.016f/2
 	static const float rest_length = 1.05f; // test
-	static const float stiffness = 40.0f; // spring stiffness 
-	static const float mass = 0.25f; // point mass 
+	static const float stiffness = 10000.0f; // spring stiffness 
+	static const float mass = 1.00f; // point mass 
 	static const float damping_factor = 0.993f; // damping, close to 1.0 | 0.993f
 	static const float gravity = 9.8f * mass; // gravitational force | 9.8f
 }
@@ -88,6 +88,8 @@ public:
 	// solve iterations
 	void solve(unsigned int n);
 	void timedSolve(unsigned int ms);
+	
+	bool systemHasConverged(SSkel<SSNodeWithSubToyInfo> &sskel);
 };
 
 // Mass-Spring System Builder Class

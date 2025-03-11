@@ -105,32 +105,16 @@ void MassSpringSolver::localStep() {
 }
 
 void MassSpringSolver::solve(unsigned int n) {
-	float a = system->damping_factor; // shorthand
+	float a = system->damping_factor;
 
-	// update inertial term
 	inertial_term = M * ((a + 1) * (current_state) - a * prev_state);
 
-	// save current state in previous state
 	prev_state = current_state;
 
-	// perform steps
 	for (unsigned int i = 0; i < n; i++) {
 		localStep();
 		globalStep();
 	}
-	
-	/*
-	// bones are arranged in bfs order
-	std::cout << "Current state:\n";
-	for (int i = 0; i < system->n_points; ++i) {
-	std::cout << "Point " << i << ": ("
-			<< current_state[3 * i] << ", "
-			<< current_state[3 * i + 1] << ", "
-			<< current_state[3 * i + 2] << ")\n";
-	}
-	*/
-
-	// std::cout << current_state << std::endl;
 }
 
 void MassSpringSolver::timedSolve(unsigned int ms) {
@@ -142,9 +126,15 @@ std::vector<float> MassSpringSolver::get_current_state() {
 	vec.clear();
 
 	for (int i = 0; i < system->n_points; ++i) {
-		vec.push_back(current_state[3 * i]);
-		vec.push_back(current_state[3 * i + 1]);
-		vec.push_back(current_state[3 * i + 2]);
+		float x = current_state[3 * i];
+        float y = current_state[3 * i + 1];
+        float z = current_state[3 * i + 2];
+
+        vec.push_back(x);
+        vec.push_back(y);
+        vec.push_back(z);
+
+        // std::cout << "Point " << i << ": (" << x << ", " << y << ", " << z << ")" << std::endl;
 	}
 	return vec;
 }
@@ -187,7 +177,7 @@ void MassSpringBuilder::buildSpringBoneSystem(
     {
 		// std::cout << ":(\n";
         // EdgeT *edge = sskel.edges[i];
-        // std::cout << sskel.edges[i]->node0->idx << " " << sskel.edges[i]->node1->idx << std::endl;'
+    	std::cout << sskel.edges[i]->node0->idx << " " << sskel.edges[i]->node1->idx << std::endl;
 		
         // structural spring
 		spring_list[k] = Edge(sskel.edges[i]->node0->idx, sskel.edges[i]->node1->idx);

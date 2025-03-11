@@ -22,6 +22,7 @@
 // mass-spring system
 static mass_spring_system* g_system;
 static MassSpringSolver* g_solver;
+static CgPointFixNode* mouseFixer;
 
 // Constraint Graph
 static CgRootNode* g_cgRootNode;
@@ -597,7 +598,7 @@ void EasyGL::mousePressEvent(QMouseEvent *event)
 
             bool shift_down = (event->modifiers() & Qt::ShiftModifier);
             bool ctrl_down = (event->modifiers() & Qt::ControlModifier);
-            m_curView->pickBone(event->pos(), shift_down, ctrl_down);
+            m_curView->pickBone(event->pos(), mouseFixer, shift_down, ctrl_down);
         }
         else if (m_opMode == OPMODE_TEXTURE_PAINT)
         {
@@ -704,15 +705,10 @@ void EasyGL::mouseMoveEvent(QMouseEvent *event)
             visitor.satisfy(*g_cgRootNode);
 
             std::vector<float> state = g_solver->get_current_state();
-            assert(!state.empty());  
+            assert(!state.empty());
             m_curView->m_skelGL->floatBd = state;
 
-            // for (const float& value : state) {
-            //    std::cout << value << " ";
-            // }
-            std::cout << std::endl;
-
-            m_curView->dragBone(event->pos(), right_click, shift_down, ctrl_down);
+            m_curView->dragBone(event->pos(), mouseFixer, right_click, shift_down, ctrl_down);
         }
         else if (m_opMode == OPMODE_TEXPAINT_IMAGE)
         {
@@ -782,9 +778,36 @@ void EasyGL::mouseReleaseEvent(QMouseEvent *event)
         }
         else if (m_opMode == OPMODE_EDIT_BONE || m_opMode == OPMODE_BBW_DEFORM)
         {
-            if (event->button() == Qt::LeftButton) {
-                
+            /*
+            while (!g_solver->systemHasConverged(m_curView->m_toy->m_sskel)) 
+            {
+                cout << ":)\n";
+                bool right_click = (event->buttons() & Qt::RightButton);
+                bool shift_down = (event->modifiers() & Qt::ShiftModifier);
+                bool ctrl_down = (event->modifiers() & Qt::ControlModifier);
+
+                g_solver->solve(g_iter);
+                g_solver->solve(g_iter); 
+
+                // fix points
+                CgSatisfyVisitor visitor;
+                visitor.satisfy(*g_cgRootNode);
+
+                std::vector<float> state = g_solver->get_current_state();
+                assert(!state.empty());
+                m_curView->m_skelGL->floatBd = state;
+
+                m_curView->dragBone(event->pos(), mouseFixer, right_click, shift_down, ctrl_down);
+                for (EasyGL *v : EasyGL::EasyGLPool())
+                {
+                    m_curView->m_skelGL->update(v);
+                    m_curView->updateSubMeshDeform(v);
+                    m_curView->m_meshGL3D->update(v);
+
+                    v->repaint();
+                }
             }
+            */
             m_curView->releaseBone(this);
         }
         else if (m_opMode == OPMODE_TEXPAINT_IMAGE)
@@ -853,7 +876,6 @@ void EasyGL::wheelEvent(QWheelEvent *event)
 
 void EasyGL::keyPressEvent(QKeyEvent *e)
 {
-
     // qDebug() << __FILE__ << " " << __LINE__ << " EasyGL " << this;
     m_curView->setInteractionMode(m_opMode);
     if (!e->modifiers())
@@ -952,16 +974,7 @@ void EasyGL::keyPressEvent(QKeyEvent *e)
             qDebug() << "switch to OPMODE_BBW mode Draw skinning colors " << this;
             m_curView->switch_to_deform_mode(this);
             for (EasyGL *v : EasyGL::EasyGLPool())
-            {
-                v->m_opMode = OPMODE_BBW_DEFORM;
-                v->is2DMode = false;
-                v->m_meshMode = MESH_MODE_SKINNING_COLORED;
-                v->isDepthTest = false;
-                v->isTransparentMode = false;
-
-                v->repaint();
-                
-                // ToDO: change rest_lengths params to each bone's rest length
+            {   
                 MassSpringBuilder *massSpringBuilder = new MassSpringBuilder();
                 SSkel<SSNodeWithSubToyInfo> cur_sskel = m_curView->m_toy->m_sskel;
 
@@ -972,7 +985,7 @@ void EasyGL::keyPressEvent(QKeyEvent *e)
                 g_system = massSpringBuilder->getResult(); 
                 // m_curView->m_skelGL->get_tips_float_data();
                 
-                g_solver = new MassSpringSolver(g_system, m_curView->m_skelGL->get_tips_float_data());      
+                g_solver = new MassSpringSolver(g_system, m_curView->m_skelGL->get_tips_float_data());   
 
                 const float tauc = 0.12f; // critical spring deformation
 	            const unsigned int deformIter = 15; // number of iterations 
@@ -983,7 +996,7 @@ void EasyGL::keyPressEvent(QKeyEvent *e)
                     new CgSpringDeformationNode(g_system, m_curView->m_skelGL->get_tips_float_data(), tauc, deformIter);
                 deformationNode->addSprings(massSpringBuilder->getStructIndex());
 
-                CgPointFixNode* mouseFixer = new CgPointFixNode(g_system, m_curView->m_skelGL->get_tips_float_data());
+                mouseFixer = new CgPointFixNode(g_system, m_curView->m_skelGL->get_tips_float_data());
 
                 // build constraint graph
                 g_cgRootNode = new CgRootNode(g_system, m_curView->m_skelGL->get_tips_float_data());
@@ -993,6 +1006,14 @@ void EasyGL::keyPressEvent(QKeyEvent *e)
 
                 // second layer
                 deformationNode->addChild(mouseFixer);
+
+                v->m_opMode = OPMODE_BBW_DEFORM;
+                v->is2DMode = false;
+                v->m_meshMode = MESH_MODE_SKINNING_COLORED;
+                v->isDepthTest = false;
+                v->isTransparentMode = false;
+
+                v->repaint();
             }
         }
         else if (e->key() == Qt::Key_G) // Move SubPart

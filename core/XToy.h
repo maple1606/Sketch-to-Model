@@ -17,6 +17,7 @@
 #include "Bone.h"
 #include "Animation.h"
 #include "BoneBoneCopyMap.h"
+#include "MassSpringSolver.h"
 
 // Painting
 #include "Color.h"
@@ -217,6 +218,7 @@ public:
     bool reinitialize_auto_dof1();
 
     bool drag_bone(int sx, int sy,
+                   CgPointFixNode* fixer,
                    int width, int height,
                    float *viewMatrix, float *mvpMatrix,
                    bool right_click, bool shift_down, bool ctrl_down);
@@ -225,7 +227,7 @@ public:
     // gather transformations for subtoy according to bones inside subtoy
     void gather_subT(int width, int height, float *mvpMatrix, XSubToy *subToy);
 
-    Bone *pick_bone(int sx, int sy, int width, int height, float *mvpMatrix, bool shift_down, bool ctrl_down);
+    Bone *pick_bone(int sx, int sy, CgPointFixNode* fixer, int width, int height, float *mvpMatrix, bool shift_down, bool ctrl_down);
 
     void set_rest_pose();
 
